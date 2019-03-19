@@ -72,7 +72,7 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
 ```
 
 # Details
-  * Right now our tool is designed to treat english wikipedia only 
+  * Right now our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
   * All tokens were lowercased 
   * The data construction process is similar to [1] and [2] :
