@@ -61,6 +61,6 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
   * Right now our tool is designed to treat english wikipedia
   * We delete all non alphanumeric characters
   * The data construction process is similar to [1] and [2] :
-  
+    * bleblblb
   
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
