@@ -40,16 +40,16 @@ optional argument:
     --random_seed              the random seed to split the data in train/validation/test (use default value to reproduce our experiments)
     --xml_output               if used, the documents and queries will be saved in xml format compatible with Terrier IRS
     
-output : our tool creates 7 files in the output_dir
-    documents.json             the json file containing the full text of documents
+output : our tool creates 7 files in the output directory
+    documents.json             
     
-    train.queries.json         the json file containing the full text of the queries used during training
-    validation.queries.json    the json file containing the full text of the queries used during validation
-    test.queries.json          the json file containing the full text of the queries used during test
+    train.queries.json         
+    validation.queries.json    
+    test.queries.json          
     
-    train.qrel                 the relevance file of the queries used during training
-    validation.qrel            the relevance file of the queries used during validation
-    test.qrel                  the relevance file of the queries used during test
+    train.qrel                 
+    validation.qrel            
+    test.qrel                  
     
 ```
 
