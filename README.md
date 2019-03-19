@@ -18,3 +18,8 @@ Clone our repository
 ```bash
 git clone https://github.com/getalp/wikIR.git
 ```
+
+# Usage
+
+  * Download and extract a [wikipedia dump](https://dumps.wikimedia.org/backup-index.html)
+
