@@ -43,7 +43,7 @@ optional argument:
 # Example 
 ```bash
 #Dowload the wikipedia dump in swahili
-wget https://dumps.wikimedia.org/swwiki/20190301
+wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
 
 #Extract the file
 bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
