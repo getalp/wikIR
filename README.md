@@ -4,7 +4,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 # Requirements
   * Python 3.6+
   * [Wikiextractor](https://github.com/attardi/wikiextractor)
-  * If working with High Ressource Language (e.g. english) you need **20GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
+  * If working with high ressource language (e.g. english) you need **20GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
 
 # Installation
 Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
@@ -57,3 +57,10 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
 
 ```
 
+# Details
+  * Right now our tool is designed to treat english wikipedia
+  * We delete all non alphanumeric characters
+  * The data construction process is similar to [1] and [2] :
+  
+  
+[1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
