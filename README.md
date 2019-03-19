@@ -43,15 +43,15 @@ optional argument:
     
 output : our tool creates the 7 following files in the output directory
 
-    documents.json             
+    documents.json             Documents
     
-    train.queries.json         
-    validation.queries.json    
-    test.queries.json          
+    train.queries.json         Train queries
+    validation.queries.json    Validation queries
+    test.queries.json          Test queries
     
-    train.qrel                 
-    validation.qrel            
-    test.qrel                  
+    train.qrel                 Train relevance judgments
+    validation.qrel            Validation relevance judgments
+    test.qrel                  Test relevance judgments
     
 ```
 
