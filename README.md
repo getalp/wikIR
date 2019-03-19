@@ -38,7 +38,7 @@ arguments :
 
 optional argument:
     --random_seed              the random seed to split the data in train/validation/test (use default value to reproduce our experiments)
-    --xml_output               if used the documents and queries will be saved in xml format compatible with Terrier IRS
+    --xml_output               if used, the documents and queries will be saved in xml format compatible with Terrier IRS
     
 output : our tool creates 7 files in the output_dir
     documents.json             the json file containing the full text of documents
