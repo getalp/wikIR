@@ -7,7 +7,14 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
   * If working with High Ressource Language (e.g. english) you need **20GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
 
 # Installation
-Get [Wikiextractor](https://github.com/attardi/wikiextractor)
+Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
 
 ```bash
 git clone https://github.com/attardi/wikiextractor.git
+```
+
+Clone our repository
+
+```bash
+git clone https://github.com/getalp/wikIR.git
+```
