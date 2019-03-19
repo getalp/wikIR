@@ -65,4 +65,5 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
     * The first sentence of each article is used to build the queries
   
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
+
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
