@@ -41,6 +41,7 @@ optional argument:
     --xml_output               if used, the documents and queries will be saved in xml format compatible with Terrier IRS
     
 output : our tool creates 7 files in the output directory
+
     documents.json             
     
     train.queries.json         
