@@ -33,12 +33,21 @@ Where input is the XML wikipedia dump file and output is the output in json form
 python build_wikIR.py [--json_file] [--output_dir] [--random_seed]
 
 arguments : 
-    --json_file        the json file produced by wikiextractor
-    --output_dir       the directory where the collection will be stored
+    --json_file                the json file produced by wikiextractor
+    --output_dir               the directory where the collection will be stored
 
 optional argument:
-    --random_seed      the random seed to split the data in train/validation/test
+    --random_seed              the random seed to split the data in train/validation/test
 
+output : our tool creates 7 files in the output_dir
+    documents.json             the json file containing the full text of documents
+    train.queries.json         the json file containing the full text of the queries used during training
+    validation.queries.json    the json file containing the full text of the queries used during validation
+    test.queries.json          the json file containing the full text of the queries used during test
+    train.qrel                 the relevance file of the queries used during training
+    validation.qrel            the relevance file of the queries used during validation
+    test.qrel                  the relevance file of the queries used during test
+    
 ```
 
 # Example 
