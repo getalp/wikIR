@@ -10,6 +10,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--json_file', nargs="?", type=str)
     parser.add_argument('--output_dir', nargs="?", type=str)
+    parser.add_argument('--xml_output', action="store_true")
     parser.add_argument('--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
     
@@ -17,7 +18,7 @@ def main():
         print(args.output_dir,'does not exist. Creating directory.')
         os.mkdir(args.output_dir)
     
-    random.seed(args.random_seed)    
+    random.seed(args.random_seed)
     queries = dict()
     documents = dict()
     documents_ids = dict()
@@ -44,7 +45,7 @@ def main():
             qrels[key].append([documents_ids[document],1])
     
     print('Cleaning documents and building queries')
-    regex = re.compile('[^a-zA-Z]')
+    regex = re.compile('[^a-zA-Z0-9]')
     for key,value in documents.items():
         document = re.sub('<[^>]+>', '', value)
         end_of_title = document.find('\n')
@@ -62,17 +63,35 @@ def main():
     test = list_ids[int(0.9*(doc_id-1)):]
     
     print('Saving documents')
-    with open(args.output_dir + '/documents.json','w') as f:
-        json.dump(documents, f)
-        
-    with open(args.output_dir + '/train.queries.json','w') as f:
-        json.dump({key:queries[key] for key in train}, f)
-            
-    with open(args.output_dir + '/validation.queries.json','w') as f:
-        json.dump({key:queries[key] for key in validation}, f)
+    
+    if args.xml_output:
+        with open(args.output_dir + '/documents.xml','w') as f:
+            for key,value in documents.items():
+                f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
+       
+        with open(args.output_dir + '/train.queries.xml','w') as f:
+            for key in train:
+                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
 
-    with open(args.output_dir + '/test.queries.json','w') as f:
-        json.dump({key:queries[key] for key in test}, f)
+        with open(args.output_dir + '/validation.queries.xml','w') as f:
+            for key in validation:
+                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+        with open(args.output_dir + '/test.queries.xml','w') as f:
+            for key in test:
+                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+    else:
+        with open(args.output_dir + '/documents.json','w') as f:
+            json.dump(documents, f)
+
+        with open(args.output_dir + '/train.queries.json','w') as f:
+            json.dump({key:queries[key] for key in train}, f)
+
+        with open(args.output_dir + '/validation.queries.json','w') as f:
+            json.dump({key:queries[key] for key in validation}, f)
+
+        with open(args.output_dir + '/test.queries.json','w') as f:
+            json.dump({key:queries[key] for key in test}, f)
         
     with open(args.output_dir + '/train.qrel','w') as f:
         for key in train:
