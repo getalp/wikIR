@@ -21,7 +21,7 @@ git clone https://github.com/getalp/wikIR.git
 
 # Usage
 
-  * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html)
+  * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html) 
   * Use [Wikiextractor](https://github.com/attardi/wikiextractor) to get the text of the wikipedia pages in json format
 ```bash
 python WikiExtractor.py input --output - --bytes 100G --links --quiet --json > output.json
@@ -29,5 +29,12 @@ Where input is the XML wikipedia dump file and output is the output in json form
 ```
   * Call our script
 ```
-python wikiIR.py --json_file output.json --output_dir dir
+python build_wikIR.py [--json_file] [--output_dir] [--random_seed]
+
+arguments : 
+    json_file        the json file produced by wikiextractor
+    output_dir        the directory where the collection will be stored
+optional argument:
+    random_seed        the random seed to split the data in train/validation/test
+
 ```
