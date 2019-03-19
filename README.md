@@ -37,8 +37,9 @@ arguments :
     --output_dir               the directory where the collection will be stored
 
 optional argument:
-    --random_seed              the random seed to split the data in train/validation/test (use default value to reproduce our experiments)
-    --xml_output               if used, the documents and queries will be saved in xml format compatible with Terrier IRS
+    --random_seed              the random seed to split the data in train/validation/test
+    --xml_output               if used, the documents and queries will be saved in xml format
+                               compatible with Terrier IRS
     
 output : our tool creates 7 files in the output directory
 
