@@ -25,8 +25,9 @@ git clone https://github.com/getalp/wikIR.git
   * Use [Wikiextractor](https://github.com/attardi/wikiextractor) to get the text of the wikipedia pages in json format
 ```bash
 python WikiExtractor.py input --output - --bytes 100G --links --quiet --json > output.json
-Where input is the XML wikipedia dump file and output is the output in json format
 ```
+Where input is the XML wikipedia dump file and output is the output in json format
+
   * Call our script
 ```
 python build_wikIR.py [--json_file] [--output_dir] [--random_seed]
@@ -42,7 +43,7 @@ optional argument:
 
 # Example 
 ```bash
-#Dowload the wikipedia dump in swahili
+#Download the wikipedia dump in swahili
 wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
 
 #Extract the file
@@ -52,7 +53,7 @@ bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
 python WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 
 #Use wikIR builder
-python wikiIR.py --json_file wiki.json --output_dir wikIR
+python build_wikiIR.py --json_file wiki.json --output_dir wikIR
 
 ```
 
