@@ -74,6 +74,7 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
 # Details
   * Right now our tool is designed to treat english wikipedia only 
   * We delete all non alphanumeric characters
+  * All tokens were lowercased 
   * The data construction process is similar to [1] and [2] :
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
