@@ -69,7 +69,7 @@ Clone our repository
 git clone https://github.com/getalp/wikIR.git
 ```
 
-Download the wikipedia dump in swahili
+Download the swahili wikipedia dump from 01/03/2019 
 ```bash
 wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
 ```
@@ -89,8 +89,42 @@ Use wikIR builder
 python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
 
+# Example on English Wikipedia (may take several hours)
+
+Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
+
+```bash
+git clone https://github.com/attardi/wikiextractor.git
+```
+
+Clone our repository
+
+```bash
+git clone https://github.com/getalp/wikIR.git
+```
+
+Download the english wikipedia dump from 01/03/2019 (may take several hours)
+```bash
+wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
+```
+
+Extract the file (may take several hours)
+```bash
+bzip2 -dk enwiki-20190301-pages-articles-multistream.xml.bz2
+```
+
+Use Wikiextractor (may take several hours)
+```bash
+python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+```
+
+Use wikIR builder (may take several hours)
+```bash
+python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
+```
 
 # Details
+  * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz CPU
   * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
   * All tokens are lowercased 
