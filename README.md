@@ -55,21 +55,27 @@ output : our tool creates the 7 following files in the output directory
     
 ```
 
-# Example 
+# Example
+Download the wikipedia dump in swahili
 ```bash
-#Download the wikipedia dump in swahili
 wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
-
-#Extract the file
-bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
-
-#Use Wikiextractor
-python WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
-
-#Use wikIR builder
-python build_wikiIR.py --json_file wiki.json --output_dir wikIR
-
 ```
+
+Extract the file
+```bash
+bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
+```
+
+Use Wikiextractor
+```bash
+python WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+```
+
+Use wikIR builder
+```bash
+python build_wikIR.py --json_file wiki.json --output_dir wikIR
+```
+
 
 # Details
   * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
