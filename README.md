@@ -123,7 +123,13 @@ Use wikIR builder (produces a 5.9 GB directory)
 python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
 
-:warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
+### :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
+
+```bash
+rm enwiki-20190301-pages-articles-multistream.xml.bz2
+rm enwiki-20190301-pages-articles-multistream.xml
+rm wiki.json
+```
 
 # Details
   * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
