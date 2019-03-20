@@ -103,22 +103,22 @@ Clone our repository
 git clone https://github.com/getalp/wikIR.git
 ```
 
-Download the english wikipedia dump from 01/03/2019 (may take several hours)
+Download the english wikipedia dump from 01/03/2019 
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Extract the file (may take several hours)
+Extract the file 
 ```bash
 bzip2 -dk enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor (may take several hours)
+Use Wikiextractor 
 ```bash
 python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
-Use wikIR builder (may take several hours)
+Use wikIR builder
 ```bash
 python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
