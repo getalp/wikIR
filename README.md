@@ -55,7 +55,20 @@ output : our tool creates the 7 following files in the output directory
     
 ```
 
-# Example
+# Quick Example
+
+Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
+
+```bash
+git clone https://github.com/attardi/wikiextractor.git
+```
+
+Clone our repository
+
+```bash
+git clone https://github.com/getalp/wikIR.git
+```
+
 Download the wikipedia dump in swahili
 ```bash
 wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
@@ -68,12 +81,12 @@ bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
 
 Use Wikiextractor
 ```bash
-python WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
 Use wikIR builder
 ```bash
-python build_wikIR.py --json_file wiki.json --output_dir wikIR
+python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
 
 
