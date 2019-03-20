@@ -72,9 +72,9 @@ python build_wikiIR.py --json_file wiki.json --output_dir wikIR
 ```
 
 # Details
-  * Right now our tokenizer was mainly designed for english and does not work on non-latin alphabets
+  * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
-  * All tokens were lowercased 
+  * All tokens are lowercased 
   * The data construction process is similar to [1] and [2] :
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
