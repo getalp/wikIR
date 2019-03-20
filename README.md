@@ -103,25 +103,27 @@ Clone our repository
 git clone https://github.com/getalp/wikIR.git
 ```
 
-Download the english wikipedia dump from 01/03/2019 
+Download the english wikipedia dump from 01/03/2019 (16.9 GB file)
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Extract the file 
+Extract the file (produces a 71.3 GB file)
 ```bash
 bzip2 -dk enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor 
+Use Wikiextractor (produces a 17.2 GB file)
 ```bash
 python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
-Use wikIR builder
+Use wikIR builder (produces a 5.9 GB directory)
 ```bash
 python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
+
+:warning: Do not forget to delete the dowloaded and intermediary files 
 
 # Details
   * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
