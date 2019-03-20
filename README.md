@@ -124,7 +124,7 @@ python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
 ```
 
 # Details
-  * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz CPU
+  * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
   * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
   * All tokens are lowercased 
