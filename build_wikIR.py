@@ -6,7 +6,7 @@ import random
 
 
 def main():
-
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('--json_file', nargs="?", type=str)
     parser.add_argument('--output_dir', nargs="?", type=str)
@@ -23,7 +23,7 @@ def main():
     documents = dict()
     documents_ids = dict()
     doc_id = 0
-
+    
     print('Reading json file')    
     with open(args.json_file) as f:
         for line in f:
@@ -32,17 +32,17 @@ def main():
             documents_ids[article['title']] = doc_id
             documents[doc_id]=text
             doc_id += 1
-    
-    list_ids = list(range(doc_id))
-    
+            
     print('Extracting links and building qrels')
     qrels = dict()
     for key,value in documents.items():
         list_qrels = re.findall(r'(?:href=")([^"]+)', value)
         qrels[key] = []
         qrels[key].append([key,2])
-        for document in [elem.replace('%20',' ') for elem in list_qrels if elem.replace('%20',' ') in documents_ids]:
-            qrels[key].append([documents_ids[document],1])
+        linked_docs = set([documents_ids[elem.replace('%20',' ')] for elem in list_qrels if elem.replace('%20',' ') in documents_ids])
+        linked_docs.discard(key)
+        for document in linked_docs:
+            qrels[key].append([document,1])
     
     print('Cleaning documents and building queries')
     regex = re.compile('[^a-zA-Z0-9]')
@@ -53,14 +53,38 @@ def main():
         first_sentence_location = document.find('.')
         query = document[0:first_sentence_location]
         documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:200])
-        queries[key] = ' '.join(regex.sub(' ', query).lower().split()[0:200])
+        queries[key] = ' '.join(regex.sub(' ', query).lower().split())
 
+    
+    print('Removing empty documents and queries')
+    empty_documents = dict()
+    
+    for key in [elem for elem in documents]:
+        if documents[key].isspace() or not documents[key]:
+            del documents[key]
+            empty_documents[key] = None
+            
+    for key in [elem for elem in queries]:
+        if queries[key].isspace() or not queries[key]:
+            del queries[key]
+            del qrels[key]
+    
+    for key in [elem for elem in qrels]:
+        new_list = [x for x in qrels[key] if x[0] not in empty_documents ]
+        if new_list != []:
+            qrels[key] = new_list
+        else:
+            del qrels[key]
+    
+    nb_queries = len(queries)
+    
+    list_ids = [key for key in queries]
     
     random.shuffle(list_ids)
     
-    train = list_ids[:int(0.8*(doc_id-1))]
-    validation = list_ids[int(0.8*(doc_id-1)):int(0.9*(doc_id-1))]
-    test = list_ids[int(0.9*(doc_id-1)):]
+    train = list_ids[:int(0.8*(nb_queries))]
+    validation = list_ids[int(0.8*(nb_queries)):int(0.9*(nb_queries))]
+    test = list_ids[int(0.9*(nb_queries)):]
     
     print('Saving documents')
     
