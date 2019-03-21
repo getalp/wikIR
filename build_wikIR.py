@@ -5,27 +5,84 @@ import argparse
 import random
 
 
+def save_xml(output_dir,documents,queries,train,validation,test):
+    with open(output_dir + '/documents.xml','w') as f:
+        for key,value in documents.items():
+            f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
+
+    with open(output_dir + '/train.queries.xml','w') as f:
+        for key in train:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+    with open(output_dir + '/validation.queries.xml','w') as f:
+        for key in validation:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+    with open(output_dir + '/test.queries.xml','w') as f:
+        for key in test:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+            
+def save_json(output_dir,documents,queries,train,validation,test):            
+    with open(output_dir + '/documents.json','w') as f:
+        json.dump(documents, f)
+
+    with open(output_dir + '/train.queries.json','w') as f:
+        json.dump({key:queries[key] for key in train}, f)
+
+    with open(output_dir + '/validation.queries.json','w') as f:
+        json.dump({key:queries[key] for key in validation}, f)
+
+    with open(output_dir + '/test.queries.json','w') as f:
+        json.dump({key:queries[key] for key in test}, f)
+   
+    
+def save_qrel(output_dir,qrels,train,validation,test):
+    with open(output_dir + '/train.qrel','w') as f:
+        for key in train:
+            for elem in qrels[key]:
+                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
+                
+    with open(output_dir + '/validation.qrel','w') as f:
+        for key in validation:
+            for elem in qrels[key]:
+                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
+                
+    with open(output_dir + '/test.qrel','w') as f:
+        for key in test:
+            for elem in qrels[key]:
+                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
+
+
+                
 def main():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument('--json_file', nargs="?", type=str)
-    parser.add_argument('--output_dir', nargs="?", type=str)
-    parser.add_argument('--xml_output', action="store_true")
-    parser.add_argument('--random_seed', nargs="?", type=int,default=27355)
+    parser.add_argument('-in','--input', nargs="?", type=str)
+    parser.add_argument('-o','--output_dir', nargs="?", type=str)
+    parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.001)
+    parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.0001)
+    parser.add_argument('-xml','--xml_output', action="store_true")
+    parser.add_argument('-both','--both_output', action="store_true")
+    parser.add_argument('-r','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
+        
+    if args.train_part <= 0 or args.validation_part <= 0 or args.train_part + args.validation_part > 1.0:
+        raise ValueError("Train part and validation part must be postitive floats and their sum must be smaller than 1")
     
     if not os.path.exists(args.output_dir):
-        print(args.output_dir,'does not exist. Creating directory.')
+        print(args.output_dir,'does not exist.\nCreating',args.output_dir)
         os.mkdir(args.output_dir)
     
     random.seed(args.random_seed)
+    
     queries = dict()
     documents = dict()
     documents_ids = dict()
     doc_id = 0
-    
-    print('Reading json file')    
-    with open(args.json_file) as f:
+        
+    print('Reading input file')    
+    with open(args.input) as f:
         for line in f:
             article = json.loads(line)
             text = article['text']
@@ -78,59 +135,33 @@ def main():
     
     nb_queries = len(queries)
     
+    print('There is',nb_queries,'queries')
+    
     list_ids = [key for key in queries]
     
     random.shuffle(list_ids)
     
-    train = list_ids[:int(0.8*(nb_queries))]
-    validation = list_ids[int(0.8*(nb_queries)):int(0.9*(nb_queries))]
-    test = list_ids[int(0.9*(nb_queries)):]
+    train_size = int(args.train_part*nb_queries)
+    validation_size = int(args.validation_part*nb_queries)
+    
+    train = list_ids[:train_size]
+    validation = list_ids[train_size:train_size+validation_size]
+    test = list_ids[train_size+validation_size:]
     
     print('Saving documents')
-    
-    if args.xml_output:
-        with open(args.output_dir + '/documents.xml','w') as f:
-            for key,value in documents.items():
-                f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
-       
-        with open(args.output_dir + '/train.queries.xml','w') as f:
-            for key in train:
-                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
 
-        with open(args.output_dir + '/validation.queries.xml','w') as f:
-            for key in validation:
-                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
-
-        with open(args.output_dir + '/test.queries.xml','w') as f:
-            for key in test:
-                f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
-    else:
-        with open(args.output_dir + '/documents.json','w') as f:
-            json.dump(documents, f)
-
-        with open(args.output_dir + '/train.queries.json','w') as f:
-            json.dump({key:queries[key] for key in train}, f)
-
-        with open(args.output_dir + '/validation.queries.json','w') as f:
-            json.dump({key:queries[key] for key in validation}, f)
-
-        with open(args.output_dir + '/test.queries.json','w') as f:
-            json.dump({key:queries[key] for key in test}, f)
+    if args.both_output:
+        save_xml(args.output_dir,documents,queries,train,validation,test)
+        save_json(args.output_dir,documents,queries,train,validation,test)
         
-    with open(args.output_dir + '/train.qrel','w') as f:
-        for key in train:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-                
-    with open(args.output_dir + '/validation.qrel','w') as f:
-        for key in validation:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-                
-    with open(args.output_dir + '/test.qrel','w') as f:
-        for key in test:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
+    else:
+        if args.xml_output:
+            save_xml(args.output_dir,documents,queries,train,validation,test)
+        else:
+            save_json(args.output_dir,documents,queries,train,validation,test)
+    
+    save_qrel(args.output_dir,qrels,train,validation,test)
+    
         
 if __name__ == "__main__":
     main()
