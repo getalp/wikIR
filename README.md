@@ -156,6 +156,14 @@ rm wiki.json
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
   
+
+
+# Statistics of the wikIR english collection
+
+| #Documents  | #Queries |
+| ------------- | ------------- |
+| 5.8M  | 5.8M  |
+
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
