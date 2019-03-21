@@ -160,9 +160,9 @@ rm wiki.json
 
 # Statistics of the wikIR english collection
 
-| #Documents  | #Queries |
-| :-: | :-: |
-| 5.8M  | 5.8M  |
+| #Documents  | #Queries | Avg rel2 | Avg rel1 |
+| :-: | :-: | :-: | :-: |
+| 5.8M  | 5.8M  | 1 | 8 |
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
