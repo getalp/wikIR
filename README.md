@@ -165,8 +165,9 @@ rm wiki.json
 | :-: | :-: | :-: | :-: |
 | 5.8M  | 5.8M  | 1 | 8 |
 
-There is as much queries as there is documents each query is associated with only one document of relevance = 2 
-on average each query has 8 documents of relevance = 1
+There is as much queries as documents.
+Each query is associated with only one document of relevance = 2 
+On average each query has 8 documents of relevance = 1
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
