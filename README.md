@@ -41,10 +41,10 @@ arguments :
 optional argument:
 
     [-t,--train_part]            Proportion of the queries used in the training process 
-                                 Default value 0.001 ≈ 58 000 queries on english wikipedia
+                                 Default value 0.001 ≈ 5 800 queries on english wikipedia
                                  
     [-v,--validation_part]       Proportion of the queries used in the validation process 
-                                 Default value 0.0001 ≈ 5 800 queries on english wikipedia
+                                 Default value 0.0001 ≈ 580 queries on english wikipedia
                                  
     [-xml,--xml_output]          If used, the documents and queries will be saved in xml format
                                  compatible with Terrier Information Retrieval System
@@ -101,7 +101,7 @@ python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
+python wikIR/build_wikIR.py -in wiki.json -o wikIR 
 ```
 
 # Example on English Wikipedia (may take several hours)
@@ -147,7 +147,8 @@ rm wiki.json
 ```
 
 # Details
-  * Our script takes **35 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
+  * Our script takes **≈30 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
+  * ≈ 5.8M queries are extracted from the english wikipedia dump of 01/03/2019
   * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
   * All tokens are lowercased 
