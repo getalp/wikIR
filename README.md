@@ -179,14 +179,13 @@ On average each query has 8 documents of relevance = 1
 
 ## Indexation
 
-Indexing wikIR on english wikipedia takes about **TBD minutes**
-
-
+Indexing wikIR with [Terrier](http://terrier.org/) (**20 minutes** on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz)
 ```bash
-cd TERRIER_DIRECTORY_PATH
-bin/trec_setup.sh PATH_TO_WIKIR/documents.xml
+cd TERRIER_PATH
+bin/trec_setup.sh WIKIR_PATH/documents.xml
 bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
 ```
+## Retireval
 
 
 *****
