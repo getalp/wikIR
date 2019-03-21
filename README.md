@@ -179,14 +179,23 @@ On average each query has 8 documents of relevance = 1
 
 ## Indexation
 
-Indexing wikIR with [Terrier](http://terrier.org/) (**20 minutes** on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz)
+Indexing wikIR with [Terrier](http://terrier.org/) (**30 minutes** on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz)
 ```bash
 cd TERRIER_PATH
 bin/trec_setup.sh WIKIR_PATH/documents.xml
 bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
 ```
-## Retireval
+## Retireval on validation with BM25 (**TBD minutes** to evaluate 5775 queries)
 
+```bash
+bin/terrier batchretrieve -Dtrec.model=BM25 -Dtrec.topics=WIKIR_PATH/validation.queries.xml
+```
+## Retireval on validation with BM25
+
+```bash
+bin/terrier batchevaluate -Dtrec.qrels=WIKIR_PATH/validation.qrel
+mv var/results/*.res WIKIR_PATH/terrier.validation.res 
+```
 
 *****
 
