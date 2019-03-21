@@ -175,6 +175,12 @@ On average each query has 8 documents of relevance = 1
 
 # Using [Terrier IR Platform](http://terrier.org/)on wikIR
 
+### :warning: **Do not forget to use the -xml or -both option when calling build_wikIR.py ** :warning:
+
+## Indexation
+
+Indexing wikIR on english wikipedia takes about **TBD minutes**
+
 
 
 *****
