@@ -37,7 +37,7 @@ arguments :
     [-o,--output_dir]            Directory where the collection will be stored
 
 optional argument:
-    [-t,--train_part]            Proportion of the queries used in the training data (Default 0.001 \approx 58 000 queries)
+    [-t,--train_part]            Proportion of the queries used in the training data (Default 0.001 ≈ 58 000 queries)
     --random_seed              the random seed to split the data in train/validation/test
     --xml_output               if used, the documents and queries will be saved in xml format
                                compatible with Terrier Information Retrieval System
