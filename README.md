@@ -176,6 +176,9 @@ On average each query has 8 documents of relevance = 1
 # Using [Terrier IR Platform](http://terrier.org/)on wikIR
 
 
+
+*****
+
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
