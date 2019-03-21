@@ -123,17 +123,17 @@ Download the english wikipedia dump from 01/03/2019 (16.9 GB file)
 wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Extract the file (produces a 71.3 GB file)
+Extract the file (:warning: produces a 71.3 GB file)
 ```bash
 bzip2 -dk enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor (produces a 17.2 GB file)
+Use Wikiextractor (:warning: produces a 17.2 GB file)
 ```bash
 python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
-Use wikIR builder (produces a 5.9 GB directory)
+Use wikIR builder (:warning: produces a 5.9 GB directory)
 ```bash
 python wikIR/build_wikIR.py -in wiki.json -o wikIR
 ```
