@@ -190,7 +190,7 @@ bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
 ```bash
 bin/terrier batchretrieve -Dtrec.model=BM25 -Dtrec.topics=WIKIR_PATH/validation.queries.xml
 ```
-## Retireval on validation with BM25
+## Evaluate BM25 Retireval on validation
 
 ```bash
 bin/terrier batchevaluate -Dtrec.qrels=WIKIR_PATH/validation.qrel
