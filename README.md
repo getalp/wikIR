@@ -47,7 +47,7 @@ optional argument:
                                  Default value 0.0001 ≈ 580 queries on english wikipedia
                                  
     [-xml,--xml_output]          If used, the documents and queries will be saved in xml format
-                                 compatible with Terrier Information Retrieval System
+                                 compatible with Terrier IR Platform
                                  If not used , the documents and queries will be saved in json format
                                  
     [-both,--both_output]        If used, the documents and queries will be saved in xml format
@@ -171,6 +171,10 @@ There is as much queries as documents.
 Each query is associated with only one document of relevance = 2 
 
 On average each query has 8 documents of relevance = 1
+
+
+# Using [Terrier IR Platform](http://terrier.org/)on wikIR
+
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
