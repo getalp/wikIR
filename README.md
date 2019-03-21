@@ -155,8 +155,8 @@ rm wiki.json
   * The data construction process is similar to [1] and [2] :
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
-    * Relevance(query,document) = 2 if the query and document were extracted from the same article
-    * Relevance(query,document) = 1 if there is a link between the article of the query and the article of the document
+    * We assign a relevance of 2 if the query and document were extracted from the same article
+    * We assign a relevance of 1 if there is a link between the article of the query and the article of the document
 
 
 # Statistics of the wikIR english collection
@@ -164,6 +164,9 @@ rm wiki.json
 | #Documents  | #Queries | Avg rel2 | Avg rel1 |
 | :-: | :-: | :-: | :-: |
 | 5.8M  | 5.8M  | 1 | 8 |
+
+There is as much queries as there is documents each query is associated with only one document of relevance = 2 
+on average each query has 8 documents of relevance = 1
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
