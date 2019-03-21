@@ -118,7 +118,7 @@ Clone our repository
 git clone https://github.com/getalp/wikIR.git
 ```
 
-Download the english wikipedia dump from 01/03/2019 (16.9 GB file)
+Download the english wikipedia dump from 01/03/2019 (:warning: 16.9 GB file)
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
