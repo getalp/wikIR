@@ -101,7 +101,7 @@ python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in wiki.json -o wikIR 
+python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1
 ```
 
 # Example on English Wikipedia (may take several hours)
@@ -135,7 +135,7 @@ python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream
 
 Use wikIR builder (produces a 5.9 GB directory)
 ```bash
-python wikIR/build_wikIR.py --json_file wiki.json --output_dir wikIR
+python wikIR/build_wikIR.py -in wiki.json -o wikIR
 ```
 
 ### :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
