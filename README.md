@@ -30,13 +30,14 @@ Where input is the XML wikipedia dump file and output is the output in json form
 
   * Call our script
 ```
-python build_wikIR.py [--json_file] [--output_dir] [--random_seed] [--xml_output]
+python build_wikIR.py [-in,--input] [-o,--output_dir] [-t,--train_part]  [-v,--validation_part]  [-xml,--xml_output] [-both,--both_output] [-r,--random_seed] 
 
 arguments : 
-    --json_file                the json file produced by wikiextractor
-    --output_dir               the directory where the collection will be stored
+    [-in,--input]                The json file produced by wikiextractor
+    [-o,--output_dir]            Directory where the collection will be stored
 
 optional argument:
+    [-t,--train_part]            Proportion of the queries used in the training data (Default 0.001 \approx 58 000 queries)
     --random_seed              the random seed to split the data in train/validation/test
     --xml_output               if used, the documents and queries will be saved in xml format
                                compatible with Terrier Information Retrieval System
