@@ -155,7 +155,8 @@ rm wiki.json
   * The data construction process is similar to [1] and [2] :
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
-  
+    * Relevance(query,document) = 2 if the query and document were extracted from the same article
+    * Relevance(query,document) = 1 if there is a link between the article of the query and the article of the document
 
 
 # Statistics of the wikIR english collection
