@@ -148,15 +148,16 @@ rm wiki.json
 
 # Details
   * Our script takes **≈30 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
-  * ≈ 5.8M queries are extracted from the english wikipedia dump of 01/03/2019
+  * **≈ 5.8M queries** are extracted from the english wikipedia dump of 01/03/2019
   * Right now, our tokenizer was mainly designed for english and does not work on non-latin alphabets
   * We delete all non alphanumeric characters
   * All tokens are lowercased 
   * The data construction process is similar to [1] and [2] :
     * Only the first 200 words of each article is used to build the documents
     * The first sentence of each article is used to build the queries
-    * We assign a relevance of 2 if the query and document were extracted from the same article
-    * We assign a relevance of 1 if there is a link between the article of the query and the article of the document
+    * We assign a **relevance of 2** if the query and document were extracted from the **same article**
+    * We assign a **relevance of 1** if there is a **link from the article of the query to the article of the document**
+    * We assign a **relevance of 0** to other documents
 
 
 # Statistics of the wikIR english collection
