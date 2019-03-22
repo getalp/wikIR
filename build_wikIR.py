@@ -5,6 +5,78 @@ import argparse
 import random
 
 
+def read_wikiextractor(file):
+    documents = dict()
+    documents_ids = dict()
+    doc_id = 0
+    with open(file) as f:
+        for line in f:
+            article = json.loads(line)
+            text = article['text']
+            documents_ids[article['title']] = doc_id
+            documents[doc_id]=text
+            doc_id += 1
+    return documents,documents_ids,doc_id
+
+
+def build_qrels(documents,documents_ids):
+    qrels = dict()
+    for key,value in documents.items():
+        list_qrels = re.findall(r'(?:href=")([^"]+)', value)
+        qrels[key] = []
+        qrels[key].append([key,2])
+        linked_docs = set([documents_ids[elem.replace('%20',' ')] for elem in list_qrels if elem.replace('%20',' ') in documents_ids])
+        linked_docs.discard(key)
+        for document in linked_docs:
+            qrels[key].append([document,1])
+    return qrels
+
+def clean_docs_and_build_queries(documents):
+    queries = dict()
+    regex = re.compile('[^a-zA-Z0-9]')
+    for key,value in documents.items():
+        document = re.sub('<[^>]+>', '', value)
+        end_of_title = document.find('\n')
+        document = document[end_of_title:]
+        first_sentence_location = document.find('.')
+        query = document[0:first_sentence_location]
+        documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:200])
+        queries[key] = ' '.join(regex.sub(' ', query).lower().split())
+    return documents,queries
+    
+def delete_empty(documents,queries,qrels):
+    
+    empty_documents = dict()
+    for key in [elem for elem in documents]:
+        if documents[key].isspace() or not documents[key]:
+            del documents[key]
+            empty_documents[key] = None
+            
+    for key in [elem for elem in queries]:
+        if queries[key].isspace() or not queries[key]:
+            del queries[key]
+            del qrels[key]
+    
+    for key in [elem for elem in qrels]:
+        new_list = [x for x in qrels[key] if x[0] not in empty_documents ]
+        if new_list != []:
+            qrels[key] = new_list
+        else:
+            del qrels[key]
+    return documents,queries,qrels
+
+def build_train_validation_test(queries,train_part,validation_part):
+    nb_queries = len(queries)
+    print('There is',nb_queries,'queries')
+    list_ids = [key for key in queries]
+    random.shuffle(list_ids)
+    train_size = int(train_part*nb_queries)
+    validation_size = int(validation_part*nb_queries)
+    train = list_ids[:train_size]
+    validation = list_ids[train_size:train_size+validation_size]
+    test = list_ids[train_size+validation_size:]
+    return train,validation,test
+
 def save_xml(output_dir,documents,queries,train,validation,test):
     with open(output_dir + '/documents.xml','w') as f:
         for key,value in documents.items():
@@ -22,7 +94,7 @@ def save_xml(output_dir,documents,queries,train,validation,test):
         for key in test:
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
 
-            
+
 def save_json(output_dir,documents,queries,train,validation,test):            
     with open(output_dir + '/documents.json','w') as f:
         json.dump(documents, f)
@@ -53,7 +125,6 @@ def save_qrel(output_dir,qrels,train,validation,test):
             for elem in qrels[key]:
                 f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
 
-
                 
 def main():
     
@@ -76,78 +147,20 @@ def main():
     
     random.seed(args.random_seed)
     
-    queries = dict()
-    documents = dict()
-    documents_ids = dict()
-    doc_id = 0
-        
     print('Reading input file')    
-    with open(args.input) as f:
-        for line in f:
-            article = json.loads(line)
-            text = article['text']
-            documents_ids[article['title']] = doc_id
-            documents[doc_id]=text
-            doc_id += 1
+    documents,documents_ids,doc_id = read_wikiextractor(args.input)
             
     print('Extracting links and building qrels')
-    qrels = dict()
-    for key,value in documents.items():
-        list_qrels = re.findall(r'(?:href=")([^"]+)', value)
-        qrels[key] = []
-        qrels[key].append([key,2])
-        linked_docs = set([documents_ids[elem.replace('%20',' ')] for elem in list_qrels if elem.replace('%20',' ') in documents_ids])
-        linked_docs.discard(key)
-        for document in linked_docs:
-            qrels[key].append([document,1])
+    qrels = build_qrels(documents,documents_ids)
     
     print('Cleaning documents and building queries')
-    regex = re.compile('[^a-zA-Z0-9]')
-    for key,value in documents.items():
-        document = re.sub('<[^>]+>', '', value)
-        end_of_title = document.find('\n')
-        document = document[end_of_title:]
-        first_sentence_location = document.find('.')
-        query = document[0:first_sentence_location]
-        documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:200])
-        queries[key] = ' '.join(regex.sub(' ', query).lower().split())
+    documents,queries = clean_docs_and_build_queries(documents)
 
-    
     print('Removing empty documents and queries')
-    empty_documents = dict()
+    documents,queries,qrels = delete_empty(documents,queries,qrels)
     
-    for key in [elem for elem in documents]:
-        if documents[key].isspace() or not documents[key]:
-            del documents[key]
-            empty_documents[key] = None
-            
-    for key in [elem for elem in queries]:
-        if queries[key].isspace() or not queries[key]:
-            del queries[key]
-            del qrels[key]
-    
-    for key in [elem for elem in qrels]:
-        new_list = [x for x in qrels[key] if x[0] not in empty_documents ]
-        if new_list != []:
-            qrels[key] = new_list
-        else:
-            del qrels[key]
-    
-    nb_queries = len(queries)
-    
-    print('There is',nb_queries,'queries')
-    
-    list_ids = [key for key in queries]
-    
-    random.shuffle(list_ids)
-    
-    train_size = int(args.train_part*nb_queries)
-    validation_size = int(args.validation_part*nb_queries)
-    
-    train = list_ids[:train_size]
-    validation = list_ids[train_size:train_size+validation_size]
-    test = list_ids[train_size+validation_size:]
-    
+    train,validation,test = build_train_validation_test(queries,args.train_part,args.validation_part)
+        
     print('Saving documents')
 
     if args.both_output:
