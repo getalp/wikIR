@@ -77,7 +77,7 @@ def build_train_validation_test(queries,train_part,validation_part,test_part):
     validation = list_ids[train_size:train_size+validation_size]
     test = list_ids[train_size+validation_size:train_size+validation_size+test_size]
     other = list_ids[train_size+validation_size+test_size:]
-    return train,validation,test,other
+    return train,validation,test
 
 def save_xml(output_dir,documents,queries,train,validation,test):
     with open(output_dir + '/documents.xml','w') as f:
