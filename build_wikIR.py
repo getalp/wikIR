@@ -79,7 +79,7 @@ def build_train_validation_test(queries,train_part,validation_part,test_part):
     other = list_ids[train_size+validation_size+test_size:]
     return train,validation,test,other
 
-def save_xml(output_dir,documents,queries,train,validation,test,other):
+def save_xml(output_dir,documents,queries,train,validation,test):
     with open(output_dir + '/documents.xml','w') as f:
         for key,value in documents.items():
             f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
@@ -97,7 +97,7 @@ def save_xml(output_dir,documents,queries,train,validation,test,other):
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
     
 
-def save_json(output_dir,documents,queries,train,validation,test,other):            
+def save_json(output_dir,documents,queries,train,validation,test):            
     with open(output_dir + '/documents.json','w') as f:
         json.dump(documents, f)
 
@@ -112,7 +112,7 @@ def save_json(output_dir,documents,queries,train,validation,test,other):
    
     
 
-def save_qrel(output_dir,qrels,train,validation,test,other):
+def save_qrel(output_dir,qrels,train,validation,test):
     with open(output_dir + '/train.qrel','w') as f:
         for key in train:
             for elem in qrels[key]:
