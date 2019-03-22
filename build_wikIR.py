@@ -96,10 +96,6 @@ def save_xml(output_dir,documents,queries,train,validation,test,other):
         for key in test:
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
     
-    with open(output_dir + '/other.queries.xml','w') as f:
-        for key in other:
-            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
-
 
 def save_json(output_dir,documents,queries,train,validation,test,other):            
     with open(output_dir + '/documents.json','w') as f:
@@ -114,8 +110,6 @@ def save_json(output_dir,documents,queries,train,validation,test,other):
     with open(output_dir + '/test.queries.json','w') as f:
         json.dump({key:queries[key] for key in test}, f)
    
-    with open(output_dir + '/other.queries.json','w') as f:
-        json.dump({key:queries[key] for key in other}, f)
     
 
 def save_qrel(output_dir,qrels,train,validation,test,other):
@@ -134,10 +128,7 @@ def save_qrel(output_dir,qrels,train,validation,test,other):
             for elem in qrels[key]:
                 f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
                 
-    with open(output_dir + '/other.qrel','w') as f:
-        for key in other:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
+   
                 
 def main():
     
@@ -173,21 +164,21 @@ def main():
     print('Removing empty documents and queries')
     documents,queries,qrels = delete_empty(documents,queries,qrels)
     
-    train,validation,test,other = build_train_validation_test(queries,args.train_part,args.validation_part,args.test_part)
+    train,validation,test = build_train_validation_test(queries,args.train_part,args.validation_part,args.test_part)
     
     print('Saving documents')
     
     if args.both_output:
-        save_xml(args.output_dir,documents,queries,train,validation,test,other)
-        save_json(args.output_dir,documents,queries,train,validation,test,other)
+        save_xml(args.output_dir,documents,queries,train,validation,test)
+        save_json(args.output_dir,documents,queries,train,validation,test)
         
     else:
         if args.xml_output:
-            save_xml(args.output_dir,documents,queries,train,validation,test,other)
+            save_xml(args.output_dir,documents,queries,train,validation,test)
         else:
-            save_json(args.output_dir,documents,queries,train,validation,test,other)
+            save_json(args.output_dir,documents,queries,train,validation,test)
     
-    save_qrel(args.output_dir,qrels,train,validation,test,other)
+    save_qrel(args.output_dir,qrels,train,validation,test)
     
         
 if __name__ == "__main__":
