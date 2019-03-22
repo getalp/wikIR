@@ -40,12 +40,15 @@ arguments :
 
 optional argument:
 
-    [-t,--train_part]            Proportion of the queries used in the training process 
+    [-t,--train_part]            Proportion of wikipedia to use in the training process 
                                  Default value 0.001 ≈ 5 800 queries on english wikipedia
                                  
-    [-v,--validation_part]       Proportion of the queries used in the validation process 
+    [-v,--validation_part]       Proportion of wikipedia to use in the validation process 
                                  Default value 0.0001 ≈ 580 queries on english wikipedia
-                                 
+    
+    [-test,--test_part]          Proportion of wikipedia to use in the test process 
+                                 Default value 0.0001 ≈ 580 queries on english wikipedia
+    
     [-xml,--xml_output]          If used, the documents and queries will be saved in xml format
                                  compatible with Terrier IR Platform
                                  If not used , the documents and queries will be saved in json format
