@@ -104,7 +104,7 @@ python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1
+python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 ```
 
 # Example on English Wikipedia (may take several hours)
