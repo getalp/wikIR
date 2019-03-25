@@ -207,9 +207,11 @@ mv var/results/*.res WIKIR_PATH/terrier.validation.res
 |validation (580 queries) | 31.00 | 56.51 | 60.72 | 55.55  | 54.16  |
 | test (580 queries) | 31.67  | 57.36 | 61.56 | 56.67 | 55.16 |
 
+:warning: These are not the results on the entire wikipedia dump, we used our script default parameter values to generate the collection :warning:
 
 Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
-We default hyperparameter values (we will update the results with optimized hyperparameter values)
+
+We use Terrier default hyperparameter values (we will update the results with optimized hyperparameter values)
 
 *****
 
