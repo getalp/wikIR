@@ -188,7 +188,7 @@ cd TERRIER_PATH
 bin/trec_setup.sh WIKIR_PATH/documents.xml
 bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
 ```
-## Retireval on validation with BM25 (**20 minutes** to evaluate 5775 queries)
+## Retireval on validation with BM25 (**2 minutes** to evaluate 580 queries)
 
 ```bash
 bin/terrier batchretrieve -Dtrec.model=BM25 -Dtrec.topics=WIKIR_PATH/validation.queries.xml
