@@ -200,8 +200,20 @@ bin/terrier batchevaluate -Dtrec.qrels=WIKIR_PATH/validation.qrel
 mv var/results/*.res WIKIR_PATH/terrier.validation.res 
 ```
 
+## Terrier BM25 results on English Wikipeadia dump of 01/03/2019 
+
+||MAP| NDCG | NDCG@5 | NDCG@10 | NDCG@20 |
+|validation (580 queries) | 31.00 | 56.51 | 60.72 | 55.55  | 54.16  |
+| test (580 queries) | 31.67  | 57.36 | 61.56 | 56.67 | 55.16 |
+
+
+Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
+We default hyperparameter values (we will update the results with optimized hyperparameter values)
+
 *****
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
+
+[3] Christophe Van Gysel and Maarten de Rijke. 2018. Pytrec_eval: An ExtremelyFast Python Interface to trec_eval.
