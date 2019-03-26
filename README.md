@@ -165,9 +165,9 @@ rm wiki.json
 
 # Statistics of the wikIR english collection
 
-| #Documents  | #Queries | Avg rel2 | Avg rel1 |
-| :-: | :-: | :-: | :-: |
-| 5.8M  | 5.8M  | 1 | 8 |
+| #Documents  | #Queries | #rels | Avg rel2 | Avg rel1 |
+| :-: | :-: | :-: | :-: | :-: |
+| 5.8M  | 5.8M | 52.2M | 1 | 8 |
 
 There is as much queries as documents.
 
@@ -176,7 +176,7 @@ Each query is associated with only one document of relevance = 2
 On average each query has 8 documents of relevance = 1
 
 
-# Using [Terrier IR Platform](http://terrier.org/)on wikIR
+# Using [Terrier IR Platform](http://terrier.org/) on wikIR
 
 ### :warning: **Do not forget to use the -xml or -both option when calling build_wikIR.py ** :warning:
 
