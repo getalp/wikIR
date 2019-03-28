@@ -65,7 +65,7 @@ output : our tool creates the 7 following files in the output directory
     
 ```
 
-# Quick Example
+# Quick Example (take a few minutes)
 
 Clone our repository
 
@@ -93,7 +93,7 @@ Use wikIR builder
 python build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 ```
 
-# Example on English Wikipedia (may take several hours)
+# Example on English Wikipedia (take several hours)
 
 Clone our repository
 
