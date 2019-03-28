@@ -16,7 +16,7 @@ git clone https://github.com/getalp/wikIR.git
   * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html) 
   * Use [Wikiextractor](https://github.com/attardi/wikiextractor) to get the text of the wikipedia pages in a signle json file, for example : 
 ```bash
-python WikiExtractor.py input --output - --bytes 100G --links --quiet --json > output.json
+python wikiextractor/WikiExtractor.py input --output - --bytes 100G --links --quiet --json > output.json
 ```
 Where input is the XML wikipedia dump file and output is the output in json format
 
@@ -89,12 +89,10 @@ Extract the file
 bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor (you can ignore the WARNING: Template errors in article)
+Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
 python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
-
-
 
 Use wikIR builder
 ```bash
@@ -125,7 +123,7 @@ Extract the file (:warning: produces a 71.3 GB file)
 bzip2 -dk enwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor (:warning: produces a 17.2 GB file)
+Use Wikiextractor (:warning: produces a 17.2 GB file ; ignore the WARNING: Template errors in article)
 ```bash
 python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
