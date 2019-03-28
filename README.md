@@ -101,18 +101,11 @@ python build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 
 # Example on English Wikipedia (may take several hours)
 
-Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
-
-```bash
-git clone https://github.com/attardi/wikiextractor.git
-```
-
 Clone our repository
 
 ```bash
 git clone https://github.com/getalp/wikIR.git
 ```
-
 Download the english wikipedia dump from 01/03/2019 (:warning: 16.9 GB file)
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
