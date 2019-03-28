@@ -128,6 +128,15 @@ rm enwiki-20190301-pages-articles-multistream.xml
 rm wiki.json
 ```
 
+# Reproducibility
+
+To reporduce the same dataset we used in our experiment just call  
+
+
+```bash
+./reproduce.sh COLLECTION_PATH
+```
+
 # Details
   * Our script takes **≈30 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
   * **≈ 5.8M queries** are extracted from the english wikipedia dump of 01/03/2019
