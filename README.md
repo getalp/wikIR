@@ -104,7 +104,7 @@ python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1
+python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 ```
 
 # Example on English Wikipedia (may take several hours)
@@ -165,9 +165,9 @@ rm wiki.json
 
 # Statistics of the wikIR english collection
 
-| #Documents  | #Queries | Avg rel2 | Avg rel1 |
-| :-: | :-: | :-: | :-: |
-| 5.8M  | 5.8M  | 1 | 8 |
+| #Documents  | #Queries | #rels | Avg rel2 | Avg rel1 |
+| :-: | :-: | :-: | :-: | :-: |
+| 5.8M  | 5.8M | 52.2M | 1 | 8 |
 
 There is as much queries as documents.
 
@@ -176,7 +176,7 @@ Each query is associated with only one document of relevance = 2
 On average each query has 8 documents of relevance = 1
 
 
-# Using [Terrier IR Platform](http://terrier.org/)on wikIR
+# Using [Terrier IR Platform](http://terrier.org/) on wikIR
 
 ### :warning: **Do not forget to use the -xml or -both option when calling build_wikIR.py ** :warning:
 
@@ -188,7 +188,7 @@ cd TERRIER_PATH
 bin/trec_setup.sh WIKIR_PATH/documents.xml
 bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
 ```
-## Retireval on validation with BM25 (**20 minutes** to evaluate 5775 queries)
+## Retireval on validation with BM25 (**2 minutes** to evaluate 580 queries)
 
 ```bash
 bin/terrier batchretrieve -Dtrec.model=BM25 -Dtrec.topics=WIKIR_PATH/validation.queries.xml
@@ -200,8 +200,23 @@ bin/terrier batchevaluate -Dtrec.qrels=WIKIR_PATH/validation.qrel
 mv var/results/*.res WIKIR_PATH/terrier.validation.res 
 ```
 
+## Terrier BM25 results on English Wikipeadia dump of 01/03/2019 
+
+||MAP| NDCG | NDCG@5 | NDCG@10 | NDCG@20 |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+|validation (580 queries) | 31.00 | 56.51 | 60.72 | 55.55  | 54.16  |
+| test (580 queries) | 31.67  | 57.36 | 61.56 | 56.67 | 55.16 |
+
+:warning: These are not the results on the entire wikipedia dump, we used default parameter values of our script:warning:
+
+Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
+
+We use Terrier default hyperparameter values (we will update the results with optimized hyperparameter values)
+
 *****
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
+
+[3] Christophe Van Gysel and Maarten de Rijke. 2018. Pytrec_eval: An ExtremelyFast Python Interface to trec_eval.
