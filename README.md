@@ -193,13 +193,13 @@ mv var/results/*.res WIKIR_PATH/terrier.validation.res
 ||MAP| NDCG | NDCG@5 | NDCG@10 | NDCG@20 |
 | :-: | :-: | :-: | :-: | :-: | :-: |
 |validation (580 queries) | 31.45 | 57.04 | 61.35 | 56.17  | 54.69  |
-| test (580 queries) | 31.67  | 57.36 | 61.56 | 56.67 | 55.16 |
+| test (580 queries) | 31.81  | 57.60 | 61.76 | 56.82 | 55.37 |
 
 :warning: These are not the results on the entire wikipedia dump, we used default parameter values of our script:warning:
 
 Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
 
-Hyperparameter values were optimized on the validation set (b = 0.6 ; k1 = 1.2 ; k3 = 8)
+Hyperparameter values were optimized on the NDCG of the validation set (b = 0.6 ; k1 = 1.2 ; k3 = 8)
 
 *****
 
