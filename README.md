@@ -199,7 +199,7 @@ mv var/results/*.res WIKIR_PATH/terrier.validation.res
 
 Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
 
-We use Terrier default hyperparameter values (we will update the results with optimized hyperparameter values)
+We use Terrier default hyperparameter values
 
 *****
 
