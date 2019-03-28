@@ -3,17 +3,9 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 
 # Requirements
   * Python 3.6+
-  * [Wikiextractor](https://github.com/attardi/wikiextractor)
   * If working with high ressource language (e.g. english) you need **20GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
 
 # Installation
-Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
-
-```bash
-git clone https://github.com/attardi/wikiextractor.git
-```
-
-Clone our repository
 
 ```bash
 git clone https://github.com/getalp/wikIR.git
@@ -97,14 +89,16 @@ Extract the file
 bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor
+Use Wikiextractor (you can ignore the WARNING: Template errors in article)
 ```bash
 python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
+
+
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
+python build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 ```
 
 # Example on English Wikipedia (may take several hours)
@@ -138,7 +132,7 @@ python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream
 
 Use wikIR builder (:warning: produces a 5.9 GB directory)
 ```bash
-python wikIR/build_wikIR.py -in wiki.json -o wikIR
+python build_wikIR.py -in wiki.json -o wikIR
 ```
 
 ### :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
