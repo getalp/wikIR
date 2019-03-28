@@ -67,12 +67,6 @@ output : our tool creates the 7 following files in the output directory
 
 # Quick Example
 
-Clone [Wikiextractor](https://github.com/attardi/wikiextractor) repository
-
-```bash
-git clone https://github.com/attardi/wikiextractor.git
-```
-
 Clone our repository
 
 ```bash
