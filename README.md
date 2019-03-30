@@ -8,7 +8,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 # Installation
 
 ```bash
-git clone https://github.com/getalp/wikIR.git
+git clone --recurse-submodules https://github.com/getalp/wikIR.git
 ```
 
 # Usage
