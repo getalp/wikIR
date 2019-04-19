@@ -192,10 +192,10 @@ mv var/results/*.res WIKIR_PATH/terrier.validation.res
 
 ## Terrier BM25 results on English Wikipeadia dump of 01/03/2019 
 
-||MAP| NDCG | NDCG@5 | NDCG@10 | NDCG@20 |
+||MAP| NDCG | P@5 | NDCG@10 | Recall |
 | :-: | :-: | :-: | :-: | :-: | :-: |
-|validation (580 queries) | 31.45 | 57.04 | 61.35 | 56.17  | 54.69  |
-| test (580 queries) | 31.81  | 57.60 | 61.76 | 56.82 | 55.37 |
+|validation (580 queries) | 31.45 | 57.04 | 25.02 | 56.17  | 48.62  |
+| test (580 queries) | 31.81  | 57.60 | 25.59 | 56.82 | 48.96 |
 
 :warning: These are not the results on the entire wikipedia dump, we used default parameter values of our script:warning:
 
