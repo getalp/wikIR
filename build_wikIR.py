@@ -62,7 +62,7 @@ def delete_empty(documents,queries,qrels):
             nb_empty += 1 
             empty_documents.add(key)
             
-    print(nb_empty,'documents have been deleted')
+    print(nb_empty,'empty documents have been deleted')
    
     
     nb_empty = 0
@@ -72,7 +72,7 @@ def delete_empty(documents,queries,qrels):
             del qrels[key]
             nb_empty += 1 
             
-    print(nb_empty,'queries have been deleted')
+    print(nb_empty,' empty queries have been deleted')
     print('There is',len(documents),'documents')
     print('There is',len(queries),'queries')
     
