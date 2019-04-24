@@ -32,14 +32,17 @@ arguments :
 
 optional argument:
 
-    [-t,--train_part]            Proportion of wikipedia to use in the training process 
-                                 Default value 0.001 ≈ 5 800 queries on english wikipedia
+    [-q,--nb_queries]            Number of queries desired
+                                 Default value -1 : all wikipedia articles will be used to produce a query
+
+    [-t,--train_part]            Proportion of queries to use in the training process 
+                                 Default value 0.8 
                                  
-    [-v,--validation_part]       Proportion of wikipedia to use in the validation process 
-                                 Default value 0.0001 ≈ 580 queries on english wikipedia
+    [-v,--validation_part]       Proportion of queries to use in the validation process 
+                                 Default value 0.1
     
-    [-test,--test_part]          Proportion of wikipedia to use in the test process 
-                                 Default value 0.0001 ≈ 580 queries on english wikipedia
+    [-test,--test_part]          Proportion of queries to use in the test process 
+                                 Default value 0.1
     
     [-xml,--xml_output]          If used, the documents and queries will be saved in xml format
                                  compatible with Terrier IR Platform
@@ -48,7 +51,7 @@ optional argument:
     [-both,--both_output]        If used, the documents and queries will be saved in xml format
                                  and in json format
                                  
-    [-r,--random_seed]           Random seed for shuffling the data
+    [-r,--random_seed]           Random seed
                                  Default value 27355
     
 output : our tool creates the 7 following files in the output directory
