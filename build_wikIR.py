@@ -135,16 +135,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-in','--input', nargs="?", type=str)
     parser.add_argument('-o','--output_dir', nargs="?", type=str)
-    parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.001)
-    parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.0001)
-    parser.add_argument('-test','--test_part', nargs="?", type=float,default = 0.0001)
+    parser.add_argument('-q','--nb_queries', nargs="?", type=int, default = 100)
+    parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.8)
+    parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.1)
+    parser.add_argument('-test','--test_part', nargs="?", type=float,default = 0.1)
     parser.add_argument('-xml','--xml_output', action="store_true")
     parser.add_argument('-both','--both_output', action="store_true")
     parser.add_argument('-r','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
     
-    if args.train_part <= 0 or args.validation_part <= 0 or args.test_part <= 0 or args.train_part + args.validation_part + args.test_part > 1.0:
-        raise ValueError("train_part, validation_part and test_part must be postitive floats and their sum must be smaller than 1")
+    if args.train_part <= 0 or args.validation_part <= 0 or args.test_part <= 0 or args.train_part + args.validation_part + args.test_part != 1.0:
+        raise ValueError("train_part, validation_part and test_part must be postitive floats and their sum must be equal to 1")
     
     if not os.path.exists(args.output_dir):
         print(args.output_dir,'does not exist.\nCreating',args.output_dir)
