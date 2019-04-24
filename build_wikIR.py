@@ -18,7 +18,6 @@ def read_wikiextractor(file):
             doc_id += 1
     return documents,documents_ids,doc_id
 
-
 def build_qrels(documents,documents_ids):
     qrels = dict()
     for key,value in documents.items():
@@ -29,9 +28,18 @@ def build_qrels(documents,documents_ids):
         linked_docs.discard(key)
         for document in linked_docs:
             qrels[key].append([document,1])
+    
     return qrels
 
-def clean_docs_and_build_queries(documents):
+
+def get_queries_subset(qrels,documents,nb_queries):
+    subset = random.sample(list(qrels), nb_queries)
+    qrels = {key:qrels[key] for key in subset}
+    set_relevant_docs = set(elem[0] for key,value in qrels.items() for elem in value)
+    documents = {key:value for key,value in documents.items() if key in set_relevant_docs}
+    return qrels,documents
+
+def clean_docs_and_build_queries(qrels,documents):
     queries = dict()
     regex = re.compile('[^a-zA-Z0-9]')
     for key,value in documents.items():
@@ -39,35 +47,49 @@ def clean_docs_and_build_queries(documents):
         end_of_title = document.find('\n')
         document = document[end_of_title:]
         first_sentence_location = document.find('.')
-        query = document[0:first_sentence_location]
         documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:200])
-        queries[key] = ' '.join(regex.sub(' ', query).lower().split())
+        if key in qrels:
+            query = document[0:first_sentence_location]
+            queries[key] = ' '.join(regex.sub(' ', query).lower().split())
     return documents,queries
     
 def delete_empty(documents,queries,qrels):
-    
-    empty_documents = dict()
+    nb_empty = 0
+    empty_documents = set()
     for key in [elem for elem in documents]:
         if documents[key].isspace() or not documents[key]:
             del documents[key]
-            empty_documents[key] = None
+            nb_empty += 1 
+            empty_documents.add(key)
             
+    print(nb_empty,'documents have been deleted')
+   
+    
+    nb_empty = 0
     for key in [elem for elem in queries]:
         if queries[key].isspace() or not queries[key]:
             del queries[key]
             del qrels[key]
+            nb_empty += 1 
+            
+    print(nb_empty,'queries have been deleted')
+    print('There is',len(documents),'documents')
+    print('There is',len(queries),'queries')
     
+    nb_paires = 0
     for key in [elem for elem in qrels]:
         new_list = [x for x in qrels[key] if x[0] not in empty_documents ]
         if new_list != []:
             qrels[key] = new_list
+            nb_paires += len(new_list)
         else:
             del qrels[key]
+    
+    print('There is',nb_paires,'(queries,documents) paires labelled with a relevance level of 1 or higher')
     return documents,queries,qrels
 
 def build_train_validation_test(queries,train_part,validation_part,test_part):
     nb_queries = len(queries)
-    print('There is',nb_queries,'queries')
     list_ids = [key for key in queries]
     random.shuffle(list_ids)
     train_size = int(train_part*nb_queries)
@@ -135,7 +157,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-in','--input', nargs="?", type=str)
     parser.add_argument('-o','--output_dir', nargs="?", type=str)
-    parser.add_argument('-q','--nb_queries', nargs="?", type=int, default = 100)
+    parser.add_argument('-q','--nb_queries', nargs="?", type=int, default = -1)
     parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.8)
     parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.1)
     parser.add_argument('-test','--test_part', nargs="?", type=float,default = 0.1)
@@ -159,8 +181,12 @@ def main():
     print('Extracting links and building qrels')
     qrels = build_qrels(documents,documents_ids)
     
+    if args.nb_queries != -1 and args.nb_queries < len(qrels):
+        print('Extracting subset of',args.nb_queries,'queries')
+        qrels,documents = get_queries_subset(qrels,documents,args.nb_queries)
+        
     print('Cleaning documents and building queries')
-    documents,queries = clean_docs_and_build_queries(documents)
+    documents,queries = clean_docs_and_build_queries(qrels,documents)
     
     print('Removing empty documents and queries')
     documents,queries,qrels = delete_empty(documents,queries,qrels)
