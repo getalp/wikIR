@@ -133,7 +133,7 @@ rm wiki.json
 
 # Reproducibility
 
-To reporduce the same dataset we used in our experiment just call  
+To reproduce the same dataset(s) we used in our experiment just call
 
 
 ```bash
