@@ -169,8 +169,9 @@ def save_qrel(output_dir,file_name,qrels,subset,documents,nb_non_relevant):
         for key in subset:
             for elem in qrels[key]:
                 f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-            for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
-                f.write(str(key) + '\t0\t' + str(elem) + '\t' + '0' + '\n')
+            if nb_non_relevant > 0 :
+                for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
+                    f.write(str(key) + '\t0\t' + str(elem) + '\t' + '0' + '\n')
 
 def save_all_qrel(output_dir,qrels,train,validation,test,documents,nb_non_relevant):
     save_qrel(output_dir,'train',qrels,train,documents,nb_non_relevant)
@@ -190,10 +191,11 @@ def save_qrel_csv(output_dir,file_name,qrels,subset,documents,nb_non_relevant):
             id_left.append(key)
             id_right.append(elem[0])
             label.append(elem[1])
-        for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
-            id_left.append(key)
-            id_right.append(elem)
-            label.append(0)
+        if nb_non_relevant > 0 :
+            for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
+                id_left.append(key)
+                id_right.append(elem)
+                label.append(0)
             
     d = {"id_left":id_left,"id_right":id_right,"label":label}
     pd.DataFrame(data=d).to_csv(output_dir + '/' + file_name + '.qrel.csv')
