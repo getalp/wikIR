@@ -3,7 +3,7 @@ import re
 import os
 import argparse
 import random
-
+import pandas as pd
 
 def read_wikiextractor(file):
     documents = dict()
@@ -131,26 +131,81 @@ def save_json(output_dir,documents,queries,train,validation,test):
 
     with open(output_dir + '/test.queries.json','w') as f:
         json.dump({key:queries[key] for key in test}, f)
-   
-    
 
-def save_qrel(output_dir,qrels,train,validation,test):
-    with open(output_dir + '/train.qrel','w') as f:
-        for key in train:
+
+        
+        
+def save_csv(output_dir,documents,queries,train,validation,test):
+    
+    index = pd.Index([key for key in documents],name = 'id_right')
+    d = {"text_right":[documents[key] for key in documents]}
+    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/documents.csv')
+    
+    index = pd.Index([key for key in train],name = 'id_left')
+    d = {"text_left":[queries[key] for key in train]}
+    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/train.queries.csv')
+    
+    index = pd.Index([key for key in validation],name = 'id_left')
+    d = {"text_left":[queries[key] for key in validation]}
+    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/validation.queries.csv')
+    
+    index = pd.Index([key for key in test],name = 'id_left')
+    d = {"text_left":[queries[key] for key in test]}
+    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/test.queries.csv')
+        
+
+                
+def generate_irrelevant_docs(qrel,documents_id,nb_non_relevant):
+    list_irrelevant_docs = []
+    while len(list_irrelevant_docs) < nb_non_relevant:
+        doc = random.choice(documents_id)
+        if doc not in qrel and doc not in list_irrelevant_docs:
+            list_irrelevant_docs.append(doc)
+    return list_irrelevant_docs
+        
+def save_qrel(output_dir,file_name,qrels,subset,documents,nb_non_relevant):
+    documents_id = [key for key in documents]
+    with open(output_dir + '/' + file_name + '.qrel','w') as f:
+        for key in subset:
             for elem in qrels[key]:
                 f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-                
-    with open(output_dir + '/validation.qrel','w') as f:
-        for key in validation:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-                
-    with open(output_dir + '/test.qrel','w') as f:
-        for key in test:
-            for elem in qrels[key]:
-                f.write(str(key) + '\t0\t' + str(elem[0]) + '\t' + str(elem[1]) + '\n')
-                
-   
+            for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
+                f.write(str(key) + '\t0\t' + str(elem) + '\t' + '0' + '\n')
+
+def save_all_qrel(output_dir,qrels,train,validation,test,documents,nb_non_relevant):
+    save_qrel(output_dir,'train',qrels,train,documents,nb_non_relevant)
+    save_qrel(output_dir,'validation',qrels,validation,documents,nb_non_relevant)
+    save_qrel(output_dir,'test',qrels,test,documents,nb_non_relevant)
+
+
+def save_qrel_csv(output_dir,file_name,qrels,subset,documents,nb_non_relevant):
+
+    documents_id = [key for key in documents]
+    
+    id_left=[]
+    id_right=[]
+    label=[]
+    for key in subset:
+        for elem in qrels[key]:
+            id_left.append(key)
+            id_right.append(elem[0])
+            label.append(elem[1])
+        for elem in generate_irrelevant_docs(qrels[key],documents_id,nb_non_relevant):
+            id_left.append(key)
+            id_right.append(elem)
+            label.append(0)
+            
+    d = {"id_left":id_left,"id_right":id_right,"label":label}
+    pd.DataFrame(data=d).to_csv(output_dir + '/' + file_name + '.qrel.csv')
+    
+    
+    
+def save_all_qrel_csv(output_dir,qrels,train,validation,test,documents,nb_non_relevant):
+    save_qrel_csv(output_dir,'train',qrels,train,documents,nb_non_relevant)
+    save_qrel_csv(output_dir,'validation',qrels,validation,documents,nb_non_relevant)
+    save_qrel_csv(output_dir,'test',qrels,test,documents,nb_non_relevant)
+    
+    
                 
 def main():
     
@@ -158,11 +213,13 @@ def main():
     parser.add_argument('-in','--input', nargs="?", type=str)
     parser.add_argument('-o','--output_dir', nargs="?", type=str)
     parser.add_argument('-q','--nb_queries', nargs="?", type=int, default = -1)
+    parser.add_argument('-n','--nb_non_relevant', nargs="?", type=int, default = 20)
     parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.8)
     parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.1)
     parser.add_argument('-test','--test_part', nargs="?", type=float,default = 0.1)
     parser.add_argument('-xml','--xml_output', action="store_true")
-    parser.add_argument('-both','--both_output', action="store_true")
+    parser.add_argument('-csv','--csv_output', action="store_true")
+    parser.add_argument('-all','--all_output', action="store_true")
     parser.add_argument('-r','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
     
@@ -195,18 +252,25 @@ def main():
     
     print('Saving documents')
     
-    if args.both_output:
+    if args.all_output:
         save_xml(args.output_dir,documents,queries,train,validation,test)
         save_json(args.output_dir,documents,queries,train,validation,test)
+        save_csv(args.output_dir,documents,queries,train,validation,test)
+        save_all_qrel_csv(args.output_dir,qrels,train,validation,test,documents,args.nb_non_relevant)
+        save_all_qrel(args.output_dir,qrels,train,validation,test,documents,args.nb_non_relevant)
+        
+    elif args.csv_output:
+        save_csv(args.output_dir,documents,queries,train,validation,test)
+        save_all_qrel_csv(args.output_dir,qrels,train,validation,test,documents,args.nb_non_relevant)
         
     else:
         if args.xml_output:
             save_xml(args.output_dir,documents,queries,train,validation,test)
         else:
             save_json(args.output_dir,documents,queries,train,validation,test)
-    
-    save_qrel(args.output_dir,qrels,train,validation,test)
-    
+
+        save_all_qrel(args.output_dir,qrels,train,validation,test,documents,args.nb_non_relevant)
+
         
 if __name__ == "__main__":
     main()
