@@ -3,7 +3,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 
 # Requirements
   * Python 3.6+
-  * If working with high ressource language (e.g. english) you need **20GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
+  * If working with high ressource language (e.g. english) you need **30GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
 
 # Installation
 
