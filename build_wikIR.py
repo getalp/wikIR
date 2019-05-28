@@ -39,7 +39,7 @@ def get_queries_subset(qrels,documents,nb_queries):
     documents = {key:value for key,value in documents.items() if key in set_relevant_docs}
     return qrels,documents
 
-def clean_docs_and_build_queries(qrels,documents):
+def clean_docs_and_build_queries(qrels,documents,len_doc):
     queries = dict()
     regex = re.compile('[^a-zA-Z0-9]')
     for key,value in documents.items():
@@ -47,7 +47,7 @@ def clean_docs_and_build_queries(qrels,documents):
         end_of_title = document.find('\n')
         document = document[end_of_title:]
         first_sentence_location = document.find('.')
-        documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:200])
+        documents[key] = ' '.join(regex.sub(' ', document).lower().split()[0:len_doc])
         if key in qrels:
             query = document[0:first_sentence_location]
             queries[key] = ' '.join(regex.sub(' ', query).lower().split())
@@ -131,8 +131,6 @@ def save_json(output_dir,documents,queries,train,validation,test):
 
     with open(output_dir + '/test.queries.json','w') as f:
         json.dump({key:queries[key] for key in test}, f)
-
-
         
         
 def save_csv(output_dir,documents,queries,train,validation,test):
@@ -216,6 +214,7 @@ def main():
     parser.add_argument('-o','--output_dir', nargs="?", type=str)
     parser.add_argument('-q','--nb_queries', nargs="?", type=int, default = -1)
     parser.add_argument('-n','--nb_non_relevant', nargs="?", type=int, default = 20)
+    parser.add_argument('-l','--len_doc', nargs="?", type=int, default = 200)
     parser.add_argument('-t','--train_part', nargs="?", type=float,default = 0.8)
     parser.add_argument('-v','--validation_part', nargs="?", type=float,default = 0.1)
     parser.add_argument('-test','--test_part', nargs="?", type=float,default = 0.1)
@@ -245,7 +244,7 @@ def main():
         qrels,documents = get_queries_subset(qrels,documents,args.nb_queries)
         
     print('Cleaning documents and building queries')
-    documents,queries = clean_docs_and_build_queries(qrels,documents)
+    documents,queries = clean_docs_and_build_queries(qrels,documents,arg.len_doc)
     
     print('Removing empty documents and queries')
     documents,queries,qrels = delete_empty(documents,queries,qrels)
