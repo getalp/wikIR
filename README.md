@@ -22,7 +22,7 @@ Where input is the XML wikipedia dump file and output is the output in json form
 
   * Call our script
 ```
-python build_wikIR.py [-in,--input] [-o,--output_dir] [-q,--nb_queries] [-n,--nb_non_relevant] [-t,--train_part] [-v,--validation_part] [-test,--test_part] [-xml,--xml_output] [-both,--both_output] [-r,--random_seed] 
+python build_wikIR.py [-in,--input] [-o,--output_dir] [-q,--nb_queries] [-n,--nb_non_relevant] [-l,--len_doc] [-t,--train_part] [-v,--validation_part] [-test,--test_part] [-xml,--xml_output] [-both,--both_output] [-r,--random_seed] 
 
 arguments : 
 
