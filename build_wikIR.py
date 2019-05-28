@@ -244,7 +244,7 @@ def main():
         qrels,documents = get_queries_subset(qrels,documents,args.nb_queries)
         
     print('Cleaning documents and building queries')
-    documents,queries = clean_docs_and_build_queries(qrels,documents,arg.len_doc)
+    documents,queries = clean_docs_and_build_queries(qrels,documents,args.len_doc)
     
     print('Removing empty documents and queries')
     documents,queries,qrels = delete_empty(documents,queries,qrels)
