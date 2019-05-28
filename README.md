@@ -34,6 +34,9 @@ optional argument:
 
     [-q,--nb_queries]            Number of queries desired
                                  Default value -1 : all wikipedia articles will be used to produce a query
+                                 
+    [-n,--nb_non_relevant]       Number of non relevant documents for each query
+                                 Default value 20
 
     [-t,--train_part]            Proportion of queries to use in the training process 
                                  Default value 0.8 
