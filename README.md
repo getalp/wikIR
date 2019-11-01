@@ -79,7 +79,7 @@ output : our tool creates the 7 following files in the output directory
 Clone our repository
 
 ```bash
-git clone https://github.com/getalp/wikIR.git
+git clone --recurse-submodules https://github.com/getalp/wikIR.git
 ```
 
 Download the swahili wikipedia dump from 01/03/2019 
