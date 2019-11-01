@@ -107,7 +107,7 @@ python build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
 Clone our repository
 
 ```bash
-git clone https://github.com/getalp/wikIR.git
+git clone --recurse-submodules https://github.com/getalp/wikIR.git
 ```
 Download the english wikipedia dump from 01/03/2019 (:warning: 16.9 GB file)
 ```bash
