@@ -89,12 +89,12 @@ wget https://dumps.wikimedia.org/swwiki/20191101/swwiki-20191101-pages-articles-
 
 Extract the file
 ```bash
-bzip2 -dk swwiki-20190301-pages-articles-multistream.xml.bz2
+bzip2 -dk swwiki-20191101-pages-articles-multistream.xml.bz2
 ```
 
 Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
-python wikiextractor/WikiExtractor.py swwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+python wikiextractor/WikiExtractor.py swwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
 Use wikIR builder
