@@ -84,7 +84,7 @@ git clone --recurse-submodules https://github.com/getalp/wikIR.git
 
 Download the swahili wikipedia dump from 01/03/2019 
 ```bash
-wget https://dumps.wikimedia.org/swwiki/20190301/swwiki-20190301-pages-articles-multistream.xml.bz2
+wget https://dumps.wikimedia.org/swwiki/20191101/swwiki-20191101-pages-articles-multistream.xml.bz2
 ```
 
 Extract the file
