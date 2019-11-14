@@ -82,7 +82,7 @@ Clone our repository
 git clone --recurse-submodules https://github.com/getalp/wikIR.git
 ```
 
-Download the swahili wikipedia dump from 01/03/2019 
+Download the swahili wikipedia dump from 01/11/2019 
 ```bash
 wget https://dumps.wikimedia.org/swwiki/20191101/swwiki-20191101-pages-articles-multistream.xml.bz2
 ```
