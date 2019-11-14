@@ -33,13 +33,13 @@ arguments :
 optional argument:
 
     [-q,--nb_queries]            Number of queries desired
-                                 Default value -1 : all wikipedia articles will be used to produce a query
+                                 Default value -1: all wikipedia articles will be used to produce a query
                                  
     [-n,--nb_non_relevant]       Number of non relevant documents for each query
                                  Default value 20
                                  
     [-l,--len_doc]               Number of max tokens in documents
-                                 Default value 200
+                                 Default value -1: all tokens are preserved
 
     [-t,--train_part]            Proportion of queries to use in the training process 
                                  Default value 0.8 
