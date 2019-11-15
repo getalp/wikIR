@@ -25,7 +25,9 @@ Where input is the XML wikipedia dump file and output is the output in json form
   * Call our script
 ```
 python build_wikIR.py [-in,--input] [-out,--output_dir] [-ld,--len_doc] [-lq,--len_query] [-mlen,--min_len_doc] [-mrel,--min_nb_rel_doc] [-val,--validation_part] [-test,--test_part] [-k,--k] [-title,--title_queries] [-first,--only_first_links] [-skip,--skip_first_sentence] [-low,--lower_cased] [-json,--json] [-rand,--random_seed] 
+```
 
+```
 arguments : 
 
     [-in,--input]                 The json file produced by wikiextractor
