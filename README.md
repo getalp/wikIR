@@ -42,16 +42,22 @@ optional argument:
     [-lq,--len_query]             Number of max tokens in queries
                                   Default value None: all tokens are preserved
                              
-    [-mlen,--min_len_doc]         Mininum number of tokens required for an article to be added as a document
+    [-mlen,--min_len_doc]         Mininum number of tokens required for an article 
+                                  to be added to the dataset as a document
                                   Default value 1000
     
-    [-mrel,--min_nb_rel_doc] 
+    [-mrel,--min_nb_rel_doc]      Mininum number of relevant documents required for 
+                                  a query to be added to the dataset
+                                  Default value 20
     
-    [-val,--validation_part] 
+    [-val,--validation_part]      Number of queries in the validation set
+                                  Default value 500
     
-    [-test,--test_part] 
+    [-test,--test_part]           Number of queries in the test set
+                                  Default value 500
     
-    [-k,--k] 
+    [-k,--k]                      Number of documents per query returned by BM25
+                                  Default value 100
     
     [-title,--title_queries] 
     
