@@ -11,6 +11,8 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 
 ```bash
 git clone --recurse-submodules https://github.com/getalp/wikIR.git
+cd wikIR
+pip install -r requirements.txt
 ```
 
 # Usage
