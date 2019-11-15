@@ -4,7 +4,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 # Requirements
   * Python 3.6+
   * If working with high ressource language (e.g. english) you need **30GB of RAM** to process the json file returned by  [Wikiextractor](https://github.com/attardi/wikiextractor)
-  * pandas library to be able to save the dataset as a dataframe compatible with [MatchZoo](https://github.com/NTMC-Community/MatchZoo) 
+  * [Pandas](https://pandas.pydata.org) library to be able to save the dataset as a dataframe compatible with [MatchZoo](https://github.com/NTMC-Community/MatchZoo) 
   * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo) 
 # Installation
 
