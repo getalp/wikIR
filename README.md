@@ -64,53 +64,22 @@ optional argument:
                                   If not used, queries are build using the first
                                   sentence of the article
     
-    [-first,--only_first_links] 
+    [-first,--only_first_links]   If used, only the links in the first sentence of 
+                                  articles will be used to build qrels
+                                  If not used, all links up to len_doc token will
+                                  be used to build qrels
     
-    [-skip,--skip_first_sentence] 
+    [-skip,--skip_first_sentence] If used, the first sentence of articles is not 
+                                  used in documents
     
-    [-low,--lower_cased] 
+    [-low,--lower_cased]          If used, all characters are lowercase
     
-    [-json,--json] 
+    [-json,--json]                If used, documents and queries are saved in json
+                                  If not used, documents and queries are saved in
+                                  csv as dataframes compatible with matchzoo
     
-    [-rand,--random_seed] 
-
-
-
-arguments : 
-
-    [-in,--input]                The json file produced by wikiextractor
-    
-    [-out,--output_dir]            Directory where the collection will be stored
-
-optional argument:
-
-    [-q,--nb_queries]            Number of queries desired
-                                 Default value -1: all wikipedia articles will be used to produce a query
-                                 
-    [-n,--nb_non_relevant]       Number of non relevant documents for each query
-                                 Default value 20
-                                 
-    [-l,--len_doc]               Number of max tokens in documents
-                                 Default value -1: all tokens are preserved
-
-    [-t,--train_part]            Proportion of queries to use in the training process 
-                                 Default value 0.8 
-                                 
-    [-v,--validation_part]       Proportion of queries to use in the validation process 
-                                 Default value 0.1
-    
-    [-test,--test_part]          Proportion of queries to use in the test process 
-                                 Default value 0.1
-    
-    [-xml,--xml_output]          If used, the documents and queries will be saved in xml format
-                                 compatible with Terrier IR Platform
-                                 If not used , the documents and queries will be saved in json format
-                                 
-    [-both,--both_output]        If used, the documents and queries will be saved in xml format
-                                 and in json format
-                                 
-    [-r,--random_seed]           Random seed
-                                 Default value 27355
+    [-rand,--random_seed]         Random seed
+                                  Default value 27355
     
 output : our tool creates the 7 following files in the output directory
 
