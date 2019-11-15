@@ -28,6 +28,45 @@ python build_wikIR.py [-in,--input] [-out,--output_dir] [-ld,--len_doc] [-lq,--l
 
 arguments : 
 
+    [-in,--input]                 The json file produced by wikiextractor
+    
+    [-out,--output_dir]           Directory where the collection will be stored
+
+optional argument:
+
+    [-ld,--len_doc]               Number of max tokens in documents
+                                  Default value None: all tokens are preserved
+                                  
+    [-lq,--len_query]             Number of max tokens in queries
+                                  Default value None: all tokens are preserved
+                             
+    [-mlen,--min_len_doc]         Mininum number of tokens required for an article to be added as a document
+                                  Default value 1000
+    
+    [-mrel,--min_nb_rel_doc] 
+    
+    [-val,--validation_part] 
+    
+    [-test,--test_part] 
+    
+    [-k,--k] 
+    
+    [-title,--title_queries] 
+    
+    [-first,--only_first_links] 
+    
+    [-skip,--skip_first_sentence] 
+    
+    [-low,--lower_cased] 
+    
+    [-json,--json] 
+    
+    [-rand,--random_seed] 
+
+
+
+arguments : 
+
     [-in,--input]                The json file produced by wikiextractor
     
     [-out,--output_dir]            Directory where the collection will be stored
