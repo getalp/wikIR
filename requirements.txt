@@ -1,0 +1,4 @@
+rank_bm25>=0.2
+pytrec_eval>=0.3
+pandas>=0.23.4
+numpy>=1.16.4
