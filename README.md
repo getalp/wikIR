@@ -76,57 +76,30 @@ output : our tool creates the 7 following files in the output directory
     
 ```
 
-# Quick Example (take a few minutes)
+
+# Example on 01/11/2019 English Wikipedia (take several hours)
 
 Clone our repository
 
 ```bash
 git clone --recurse-submodules https://github.com/getalp/wikIR.git
 ```
-
-Download the swahili wikipedia dump from 01/11/2019 
-```bash
-wget https://dumps.wikimedia.org/swwiki/20191101/swwiki-20191101-pages-articles-multistream.xml.bz2
-```
-
-Extract the file
-```bash
-bzip2 -dk swwiki-20191101-pages-articles-multistream.xml.bz2
-```
-
-Use Wikiextractor (ignore the WARNING: Template errors in article)
-```bash
-python wikIR/wikiextractor/WikiExtractor.py swwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
-```
-
-Use wikIR builder
-```bash
-python build_wikIR.py -in wiki.json -o wikIR -t 0.8 -v 0.1 -test 0.1
-```
-
-# Example on English Wikipedia (take several hours)
-
-Clone our repository
-
-```bash
-git clone --recurse-submodules https://github.com/getalp/wikIR.git
-```
-Download the english wikipedia dump from 01/11/2019 (:warning: 16.9 GB file)
+Download the english wikipedia dump from 01/11/2019
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
 ```
 
-Extract the file (:warning: produces a 71.3 GB file)
+Extract the file 
 ```bash
 bzip2 -dk enwiki-20191101-pages-articles-multistream.xml.bz2
 ```
 
-Use Wikiextractor (:warning: produces a 17.2 GB file ; ignore the WARNING: Template errors in article)
+Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
 python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
 ```
 
-Use wikIR builder (:warning: produces a 5.9 GB directory)
+Use wikIR builder
 ```bash
 python build_wikIR.py -in wiki.json -o wikIR
 ```
