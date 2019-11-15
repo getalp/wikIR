@@ -59,7 +59,10 @@ optional argument:
     [-k,--k]                      Number of documents per query returned by BM25
                                   Default value 100
     
-    [-title,--title_queries] 
+    [-title,--title_queries]      If used, queries are build using the title of 
+                                  the article 
+                                  If not used, queries are build using the first
+                                  sentence of the article
     
     [-first,--only_first_links] 
     
