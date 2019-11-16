@@ -26,7 +26,7 @@ Where input is the XML wikipedia dump file and output is the output in json form
 
   * Call our script
 ```
-python build_wikIR.py [-in,--input] [-out,--output_dir] [-ld,--len_doc] [-lq,--len_query] [-mlen,--min_len_doc] [-mrel,--min_nb_rel_doc] [-val,--validation_part] [-test,--test_part] [-k,--k] [-title,--title_queries] [-first,--only_first_links] [-skip,--skip_first_sentence] [-low,--lower_cased] [-json,--json] [-rand,--random_seed] 
+python build_wikIR.py [-in,--input] [-out,--output_dir] [-ld,--len_doc] [-lq,--len_query] [-mlen,--min_len_doc] [-mrel,--min_nb_rel_doc] [-val,--validation_part] [-test,--test_part] [-k,--k] [-title,--title_queries] [-first,--only_first_links] [-skip,--skip_first_sentence] [-low,--lower_cased] [-json,--json] [-bm25,--bm25] [-rand,--random_seed] 
 ```
 
 ```
@@ -58,9 +58,6 @@ optional argument:
     [-test,--test_part]           Number of queries in the test set
                                   Default value 500
     
-    [-k,--k]                      Number of documents per query returned by BM25
-                                  Default value 100
-    
     [-title,--title_queries]      If used, queries are build using the title of 
                                   the article 
                                   If not used, queries are build using the first
@@ -79,6 +76,13 @@ optional argument:
     [-json,--json]                If used, documents and queries are saved in json
                                   If not used, documents and queries are saved in
                                   csv as dataframes compatible with matchzoo
+                                  
+    [-bm25,--bm25]                If used, perform and save results of BM25 ranking 
+                                  model on the collection
+                                
+    [-k,--k]                      If BM25 is used, indicates the number of documents 
+                                  per query saved 
+                                  Default value 100
     
     [-rand,--random_seed]         Random seed
                                   Default value 27355
