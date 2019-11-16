@@ -86,19 +86,7 @@ optional argument:
     
     [-rand,--random_seed]         Random seed
                                   Default value 27355
-    
-output : our tool creates the 7 following files in the output directory
-
-    documents.json             Documents
-    
-    train.queries.json         Train queries
-    validation.queries.json    Validation queries
-    test.queries.json          Test queries
-    
-    train.qrel                 Train relevance judgments
-    validation.qrel            Validation relevance judgments
-    test.qrel                  Test relevance judgments
-    
+        
 ```
 
 
