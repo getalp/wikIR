@@ -46,17 +46,17 @@ optional argument:
                              
     [-mlen,--min_len_doc]         Mininum number of tokens required for an article 
                                   to be added to the dataset as a document
-                                  Default value 1000
+                                  Default value 200
     
     [-mrel,--min_nb_rel_doc]      Mininum number of relevant documents required for 
                                   a query to be added to the dataset
-                                  Default value 20
+                                  Default value 5
     
     [-val,--validation_part]      Number of queries in the validation set
-                                  Default value 500
+                                  Default value 1000
     
     [-test,--test_part]           Number of queries in the test set
-                                  Default value 500
+                                  Default value 1000
     
     [-title,--title_queries]      If used, queries are build using the title of 
                                   the article 
