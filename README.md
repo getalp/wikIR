@@ -117,12 +117,12 @@ bzip2 -dk enwiki-20191101-pages-articles-multistream.xml.bz2
 
 Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
-python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+python wikIR/wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 ```
 
 Use wikIR builder
 ```bash
-python build_wikIR.py -in wiki.json -o wikIR
+python wikIR/build_wikIR.py -in enwiki.json -out data
 ```
 
 ### :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
