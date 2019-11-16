@@ -1,11 +1,11 @@
-wget https://dumps.wikimedia.org/enwiki/20190301/enwiki-20190301-pages-articles-multistream.xml.bz2
+wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
 
-bzip2 -d enwiki-20190301-pages-articles-multistream.xml.bz2
+bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
 
-python wikiextractor/WikiExtractor.py enwiki-20190301-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > wiki.json
+python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 
-rm enwiki-20190301-pages-articles-multistream.xml
+rm enwiki-20191101-pages-articles-multistream.xml
 
-python build_wikIR.py -in wiki.json -o $1
+python build_wikIR.py -in enwiki.json -o data -title -first -skip -low -bm25
 
 rm wiki.json
