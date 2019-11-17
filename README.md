@@ -127,14 +127,14 @@ rm wiki.json
 
 # Reproducibility
 
-To reproduce the same datasets we used in our experiment just call in the directory where collection will be saved
+To reproduce the same datasets we used in our experiment just call the following script
 
 
 ```bash
-./reproduce.sh
+./reproduce.sh COLLECTION_PATH
 ```
 
-COLLECTION_PATH is the directory where the dataset will be stored
+COLLECTION_PATH is the directory where the datasets will be stored
 
 # Details
   * Our script takes **≈30 minutes** to build the collection on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz
