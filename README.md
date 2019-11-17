@@ -127,11 +127,11 @@ rm wiki.json
 
 # Reproducibility
 
-To reproduce the same dataset(s) we used in our experiment just call
+To reproduce the same datasets we used in our experiment just call in the directory where collection will be saved
 
 
 ```bash
-./reproduce.sh COLLECTION_PATH
+./reproduce.sh
 ```
 
 COLLECTION_PATH is the directory where the dataset will be stored
