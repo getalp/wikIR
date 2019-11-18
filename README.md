@@ -11,12 +11,13 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 
 # Installation
 
+Install wikIR
 ```bash
 git clone --recurse-submodules https://github.com/getalp/wikIR.git
 cd wikIR
 pip install -r requirements.txt
 ```
-Optional: install [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
+Install [MatchZoo](https://github.com/NTMC-Community/MatchZoo) (optional)
 ```bash
 git clone https://github.com/NTMC-Community/MatchZoo.git
 cd MatchZoo
