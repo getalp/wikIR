@@ -87,7 +87,7 @@ optional argument:
     
     [-skip,--skip_first_sentence] If used, the first sentence of articles is not 
                                   used in documents
-    
+    Developmental_disorder
     [-low,--lower_cased]          If used, all characters are lowercase
     
     [-json,--json]                If used, documents and queries are saved in json
@@ -159,7 +159,7 @@ COLLECTION_PATH is the directory where the datasets will be stored
   * Title or first sentence of each article is used to build the queries
   * We assign a **relevance of 2** if the query and document were extracted from the **same article**
   * We assign a **relevance of 1** if there is a **link from the article of the document to the article of the query**
-    * For example the document from the article [Autism](https://en.wikipedia.org/wiki/Autism) is relevant to the query from the article [Developmental disorder](https://en.wikipedia.org/wiki/Developmental_disorder).
+    * For example the document [Autism](https://en.wikipedia.org/wiki/Autism) is relevant to the query [Developmental disorder](https://en.wikipedia.org/wiki/Developmental_disorder).
 
 # Statistics of the wikIR english collection
 
