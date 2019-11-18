@@ -16,7 +16,12 @@ git clone --recurse-submodules https://github.com/getalp/wikIR.git
 cd wikIR
 pip install -r requirements.txt
 ```
-
+Optional: install [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
+```bash
+git clone https://github.com/NTMC-Community/MatchZoo.git
+cd MatchZoo
+python setup.py install
+```
 # Usage
 
   * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html) 
