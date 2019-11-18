@@ -161,6 +161,9 @@ To reproduce the same datasets we used in our experiment just call the following
 
 COLLECTION_PATH is the directory where the datasets will be stored
 
+# Downloads
+
+You can download the dev dataset [here](https://zenodo.org/record/3545871#.XdKJAtF7k5k).
 
 # Statistics of the wikIR english collection
 
