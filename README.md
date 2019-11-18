@@ -171,7 +171,7 @@ You can download the dataset **TBD**
 
 # Citation
 
-If you use wikIR tool ot the dataset we provideto produce results for your scientific publication, please refer to our paper:
+If you use wikIR tool or the dataset we provide to produce results for your scientific publication, please refer to our paper:
 
 **TDB**
 
