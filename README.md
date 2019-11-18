@@ -124,11 +124,6 @@ optional argument:
 
 # Example on 01/11/2019 English Wikipedia
 
-Clone our repository
-
-```bash
-git clone --recurse-submodules https://github.com/getalp/wikIR.git
-```
 Download the english wikipedia dump from 01/11/2019
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
