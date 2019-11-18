@@ -166,18 +166,7 @@ COLLECTION_PATH is the directory where the datasets will be stored
 # Downloads
 
 You can download the dev dataset [here](https://zenodo.org/record/3545871#.XdKJAtF7k5k).
-
-# Statistics of the wikIR english collection
-
-| #Documents  | #Queries | #rels | Avg rel2 | Avg rel1 |
-| :-: | :-: | :-: | :-: | :-: |
-| 5.8M  | 5.8M | 52.2M | 1 | 8 |
-
-There is as much queries as documents.
-
-Each query is associated with only one document of relevance = 2 
-
-On average each query has 8 documents of relevance = 1
+You can download the dataset **TBD**
 
 *****
 
