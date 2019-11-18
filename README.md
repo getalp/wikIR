@@ -19,6 +19,12 @@ git clone --recurse-submodules https://github.com/getalp/wikIR.git
 cd wikIR
 pip install -r requirements.txt
 ```
+
+Install [Rank-BM25](https://github.com/dorianbrown/rank_bm25) (optional)
+```bash
+pip install git+ssh://git@github.com/dorianbrown/rank_bm25.git
+```
+
 Install [MatchZoo](https://github.com/NTMC-Community/MatchZoo) (optional)
 ```bash
 git clone https://github.com/NTMC-Community/MatchZoo.git
