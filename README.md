@@ -154,7 +154,9 @@ To reproduce the same datasets we used in our experiment just call the following
 COLLECTION_PATH is the directory where the datasets will be stored
 
 # Details
-  * The relevance judgments are obtained wiyh a process similar to [1] and [2] :
+  * The data construction process is similar to [1] and [2] :
+    * Article without their titles are used to build the documents	
+    * Title or first sentence of each article is used to build the queries
     * We assign a **relevance of 2** if the query and document were extracted from the **same article**
     * We assign a **relevance of 1** if there is a **link from the article of the document to the article of the query**
 
