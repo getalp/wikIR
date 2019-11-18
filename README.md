@@ -166,7 +166,14 @@ COLLECTION_PATH is the directory where the datasets will be stored
 # Downloads
 
 You can download the dev dataset [here](https://zenodo.org/record/3545871#.XdKJAtF7k5k).
+
 You can download the dataset **TBD**
+
+# Citation
+
+If you use wikIR tool ot the dataset we provideto produce results for your scientific publication, please refer to our paper:
+
+**TDB**
 
 *****
 
