@@ -170,45 +170,9 @@ Each query is associated with only one document of relevance = 2
 
 On average each query has 8 documents of relevance = 1
 
-
-# Using [Terrier IR Platform](http://terrier.org/) on wikIR
-
-### :warning: **Do not forget to use the -xml or -both option when calling build_wikIR.py ** :warning:
-
-## Indexation
-
-Indexing wikIR with [Terrier](http://terrier.org/) (**30 minutes** on an Intel(R) Xeon(R) CPU E5-2623 v4 @ 2.60GHz)
-```bash
-cd TERRIER_PATH
-bin/trec_setup.sh WIKIR_PATH/documents.xml
-bin/terrier batchindexing -Dtermpipelines=Stopwords,PorterStemmer
-```
-## Retireval on validation with BM25 (**2 minutes** to evaluate 580 queries)
-
-```bash
-bin/terrier batchretrieve -Dtrec.model=BM25 -Dtrec.topics=WIKIR_PATH/validation.queries.xml
-```
-## Evaluate BM25 Retireval on validation
-
-```bash
-bin/terrier batchevaluate -Dtrec.qrels=WIKIR_PATH/validation.qrel
-mv var/results/*.res WIKIR_PATH/terrier.validation.res 
-```
-
-## Terrier BM25 results on English Wikipeadia dump of 01/03/2019 
-
-||MAP| NDCG | P@5 | NDCG@10 | Recall |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-|validation (580 queries) | 31.45 | 57.04 | 25.02 | 56.17  | 48.62  |
-| test (580 queries) | 31.81  | 57.60 | 25.59 | 56.82 | 48.96 |
-
-:warning: These are not the results on the entire wikipedia dump, we used default parameter values of our script:warning:
+*****
 
 Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
-
-Hyperparameter values were optimized on the NDCG of the validation set (b = 0.6 ; k1 = 1.2 ; k3 = 8)
-
-*****
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
