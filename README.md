@@ -1,7 +1,17 @@
 # wikIR
 A python tool for building a large scale Wikipedia-based Information Retrieval dataset
 
-# Requirements
+# Table of Contents
+1. [Requirements](#Requirements)
+2. [Installation](#Installation)
+3. [Usage](#Usage)
+4. [Details](#Details)
+5. [Example](#Example)
+6. [Reproducibility](#Reproducibility)
+7. [Downloads](#Downloads)
+8. [Citation](#Citation)
+
+## Requirements
   * Python 3.6+
   * [NumPy](https://numpy.org) and [SciPy](https://www.scipy.org) 
   * [pytrec_eval](https://github.com/cvangysel/pytrec_eval) to evaluate the runs 
@@ -11,7 +21,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
     * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
     * [MatchZoo](https://github.com/NTMC-Community/MatchZoo) in order to train and evaluate neural networks on the collection
 
-# Installation
+## Installation
 
 Install wikIR
 ```bash
@@ -31,7 +41,7 @@ git clone https://github.com/NTMC-Community/MatchZoo.git
 cd MatchZoo
 python setup.py install
 ```
-# Usage
+## Usage
 
   * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html) 
   * Use [Wikiextractor](https://github.com/attardi/wikiextractor) to get the text of the wikipedia pages in a signle json file, for example : 
@@ -113,7 +123,7 @@ optional argument:
         
 ```
 
-# Details
+## Details
   * The data construction process is similar to [1] and [2]
   * Article without their titles are used to build the documents	
   * Title or first sentence of each article is used to build the queries
@@ -122,7 +132,7 @@ optional argument:
     * For example the document [Autism](https://en.wikipedia.org/wiki/Autism) is relevant to the query [Developmental disorder](https://en.wikipedia.org/wiki/Developmental_disorder).
 
 
-# Example on 01/11/2019 English Wikipedia
+## Example
 
 Download the english wikipedia dump from 01/11/2019
 ```bash
@@ -144,7 +154,7 @@ Use wikIR builder
 python wikIR/build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low -bm25
 ```
 
-### :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
+:warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
 
 ```bash
 rm enwiki-20190301-pages-articles-multistream.xml.bz2
@@ -152,9 +162,9 @@ rm enwiki-20190301-pages-articles-multistream.xml
 rm wiki.json
 ```
 
-# Reproducibility
+## Reproducibility
 
-## Datasets and BM25
+### Datasets and BM25
 
 To reproduce the same datasets we used in our experiment just call the following script
 
@@ -163,14 +173,14 @@ To reproduce the same datasets we used in our experiment just call the following
 ```
 COLLECTION_PATH is the directory where the datasets will be stored
 
-## Train and evaluate neural networks for ad-hoc IR with matchzoo
+### Train and evaluate neural networks for ad-hoc IR with matchzoo
 
 To reproduce our results with matchzoo models, call
 ```bash
 python matchzoo_experiment.py -c config.json
 ```
 
-## Display results
+### Display results
 To compute statistical significance against BM25 with Student t-test with Bonferroni correction and display the results, call
 
 ```bash
@@ -178,13 +188,13 @@ python display_res.py -c config.json
 ```
 
 
-# Downloads
+## Downloads
 
 You can download the dev dataset [here](https://zenodo.org/record/3547440#.XdPXbtF7k5l).
 
 You can download the full dataset **TBD**
 
-# Citation
+## Citation
 
 If you use wikIR tool or the dataset we provide to produce results for your scientific publication, please refer to our paper:
 
