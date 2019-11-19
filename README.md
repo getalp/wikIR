@@ -57,7 +57,7 @@ python build_wikIR.py [-in,--input] [-out,--output_dir]
                       [-mrel,--min_nb_rel_doc] [-val,--validation_part] [-test,--test_part]
                       [-k,--k] [-title,--title_queries] [-first,--only_first_links] 
                       [-skip,--skip_first_sentence] [-low,--lower_cased] [-json,--json] 
-                      [-bm25,--bm25] [-rand,--random_seed] 
+                      [-xml,--xml] [-bm25,--bm25] [-rand,--random_seed] 
 ```
 
 ```
@@ -104,12 +104,17 @@ optional argument:
     
     [-skip,--skip_first_sentence] If used, the first sentence of articles is not 
                                   used in documents
-    Developmental_disorder
+    
     [-low,--lower_cased]          If used, all characters are lowercase
     
     [-json,--json]                If used, documents and queries are saved in json
                                   If not used, documents and queries are saved in
                                   csv as dataframes compatible with matchzoo
+                                  
+    [-xml,--xml]                  If used, documents and queries are saved in xml
+                                  format compatible with Terrier IRS 
+                                  If not used, documents and queries are saved in
+                                  csv as dataframes compatible with matchzoo                                  
                                   
     [-bm25,--bm25]                If used, perform and save results of BM25 ranking 
                                   model on the collection
