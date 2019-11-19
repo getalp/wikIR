@@ -166,7 +166,7 @@ rm wiki.json
 
 ### Datasets and BM25
 
-To reproduce the same datasets we used in our experiment just call the following script
+To reproduce the same datasets we used in our paper (link:TBD) just call the following script
 
 ```bash
 ./reproduce_datasets.sh COLLECTION_PATH
