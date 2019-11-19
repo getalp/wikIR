@@ -175,18 +175,19 @@ COLLECTION_PATH is the directory where the datasets will be stored
 
 ### Train and evaluate neural networks for ad-hoc IR with matchzoo
 
-To reproduce our results with matchzoo models, call
+To reproduce our results with matchzoo models on the dev dataset, call
 ```bash
 python matchzoo_experiment.py -c config.json
 ```
 
 ### Display results
-To compute statistical significance against BM25 with Student t-test with Bonferroni correction and display the results, call
+To compute statistical significance against BM25 with Student t-test with Bonferroni correction 
+and display the results of the dev dataset, call
 
 ```bash
 python display_res.py -c config.json
 ```
-
+Change "collection_path" in the config.json file if you want to train and display results on the full dataset
 
 ## Downloads
 
