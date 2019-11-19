@@ -125,7 +125,7 @@ optional argument:
 
 ## Details
   * The data construction process is similar to [1] and [2]
-  * Article without their titles are used to build the documents	
+  * Article used to build the documents (article titles are removed from documents)	
   * Title or first sentence of each article is used to build the queries
   * We assign a **relevance of 2** if the query and document were extracted from the **same article**
   * We assign a **relevance of 1** if there is a **link from the article of the document to the article of the query**
