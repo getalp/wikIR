@@ -157,8 +157,8 @@ python wikIR/build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -ski
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
 
 ```bash
-rm enwiki-20190301-pages-articles-multistream.xml.bz2
-rm enwiki-20190301-pages-articles-multistream.xml
+rm enwiki-20191101-pages-articles-multistream.xml.bz2
+rm enwiki-20191101-pages-articles-multistream.xml
 rm wiki.json
 ```
 
