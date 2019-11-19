@@ -554,7 +554,7 @@ def main():
     parser.add_argument('-skip','--skip_first_sentence', action="store_true")
     parser.add_argument('-low','--lower_cased', action="store_true")
     parser.add_argument('-json','--json', action="store_true")
-    parser.add_argument('-xml','--json', action="store_true")
+    parser.add_argument('-xml','--xml', action="store_true")
     parser.add_argument('-bm25','--bm25', action="store_true")
     parser.add_argument('-rand','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
