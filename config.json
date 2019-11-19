@@ -1,0 +1,8 @@
+{
+    "collection_path" : "dev_wikIR",
+    "index_mz_models" : [6,7,8,10,14],
+    "measures" : ["map","ndcg_cut","recall","P"],
+    "print_measures" : ["P_5","P_10","P_20", "ndcg_cut_5","ndcg_cut_10","ndcg_cut_20","ndcg_cut_100","map"],
+    "optim_measure" : "ndcg_cut_100"
+
+}
