@@ -151,7 +151,7 @@ python wikIR/wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multi
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low -bm25
+python wikIR/build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low
 ```
 
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
