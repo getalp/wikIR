@@ -162,6 +162,16 @@ To reproduce the same datasets we used in our experiment just call the following
 COLLECTION_PATH is the directory where the datasets will be stored
 
 
+To reproduce our results with matchzoo models, call
+```bash
+python matchzoo_experiment.py -c config.json
+```
+
+To compute statistical significance against BM25 with Student t-test with Bonferroni correction and display the results, call
+
+```bash
+python display_res.py -c config.json
+```
 
 
 # Downloads
