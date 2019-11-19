@@ -154,7 +154,7 @@ rm wiki.json
 
 # Reproducibility
 
-## Datasets
+## Datasets and BM25
 
 To reproduce the same datasets we used in our experiment just call the following script
 
@@ -163,12 +163,14 @@ To reproduce the same datasets we used in our experiment just call the following
 ```
 COLLECTION_PATH is the directory where the datasets will be stored
 
+## Train and evaluate neural networks for ad-hoc IR with matchzoo
 
 To reproduce our results with matchzoo models, call
 ```bash
 python matchzoo_experiment.py -c config.json
 ```
 
+## Display results
 To compute statistical significance against BM25 with Student t-test with Bonferroni correction and display the results, call
 
 ```bash
