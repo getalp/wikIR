@@ -10,6 +10,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
   * **Optional**:
     * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
     * [MatchZoo](https://github.com/NTMC-Community/MatchZoo) in order to train and evaluate neural networks on the collection
+    * [scipy](https://www.scipy.org) to compute statistical significance tests
 
 # Installation
 
