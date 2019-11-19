@@ -8,6 +8,7 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 4. [Details](#Details)
 5. [Example](#Example)
 6. [Reproducibility](#Reproducibility)
+    1.[Datasets and BM25](#Datasets and BM25)
 7. [Downloads](#Downloads)
 8. [Citation](#Citation)
 
