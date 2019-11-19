@@ -187,7 +187,7 @@ and display the results of the dev dataset, call
 ```bash
 python display_res.py -c config.json
 ```
-Change "collection_path" in the config.json file if you want to train and display results on the full dataset
+:warning: Change "collection_path" in the config.json file if you want to train and display results on the full dataset
 
 ## Downloads
 
