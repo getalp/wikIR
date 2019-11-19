@@ -203,10 +203,6 @@ If you use wikIR tool or the dataset we provide to produce results for your scie
 
 *****
 
-Results were computed with [pytrec_eval](https://github.com/cvangysel/pytrec_eval) [3]
-
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
 [2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
-
-[3] Christophe Van Gysel and Maarten de Rijke. 2018. Pytrec_eval: An ExtremelyFast Python Interface to trec_eval.
