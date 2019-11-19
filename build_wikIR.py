@@ -274,6 +274,34 @@ def save_json(output_dir,documents,queries,train,validation,test):
     
     
     
+"""Saves queries and documents in an xml format compatible with Terrier information retireval system:
+    
+    Args:
+        (str) output_dir: path of the directory where the collection will be stored
+        (dict) documents: output of delete_empty
+        (dict) queries: output of delete_empty
+        (list) train: output of build_train_validation_test
+        (list) validation: output of build_train_validation_test
+        (list) test: output of build_train_validation_test
+                
+"""
+def save_xml(output_dir,documents,queries,train,validation,test):
+    with open(output_dir + '/documents.xml','w') as f:
+        for key,value in documents.items():
+            f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
+
+    with open(output_dir + '/train.queries.xml','w') as f:
+        for key in train:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+    with open(output_dir + '/validation.queries.xml','w') as f:
+        for key in validation:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+
+    with open(output_dir + '/test.queries.xml','w') as f:
+        for key in test:
+            f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
+    
     
     
 """Saves qrels in the TREC format:
@@ -526,6 +554,7 @@ def main():
     parser.add_argument('-skip','--skip_first_sentence', action="store_true")
     parser.add_argument('-low','--lower_cased', action="store_true")
     parser.add_argument('-json','--json', action="store_true")
+    parser.add_argument('-xml','--json', action="store_true")
     parser.add_argument('-bm25','--bm25', action="store_true")
     parser.add_argument('-rand','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
@@ -569,11 +598,15 @@ def main():
     train,validation,test = build_train_validation_test(queries,args.validation_part,args.test_part)
     
     if args.json:
-        print('Saving collection as json')
+        print('Saving collection with json format')
         save_json(args.output_dir,documents,queries,train,validation,test)
     
+    elif args.xml:
+        print('Saving collection with xml format')
+        save_xml(args.output_dir,documents,queries,train,validation,test)
+    
     else: 
-        print('Saving collection as csv')
+        print('Saving collection with csv format')
         save_csv(args.output_dir,documents,queries,train,validation,test)
 
     save_all_qrel(args.output_dir,qrels,train,validation,test)
