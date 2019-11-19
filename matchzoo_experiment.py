@@ -1,4 +1,5 @@
 import os
+import json
 import argparse
 import build_wikIR
 import pandas as pd
@@ -109,30 +110,33 @@ def evaluate_and_save_results(model,set_gen,model_path,run,epoch,collection_path
 def main():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument('-data','--data', nargs="?", type=str)
+    parser.add_argument('-c','--config', nargs="?", type=str)
     parser.add_argument('-gpu','--gpu', nargs="?", type=str, default = None)
     parser.add_argument('-runs','--nb_runs', nargs="?", type=int, default = 3)
     args = parser.parse_args()
     
-    os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
+    config = json.load(open(args.config,'r'))
     
-    train_raw,validation_raw,test_raw = load_wikIR(args.data)
+    if args.gpu:
+        os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
+    
+    train_raw,validation_raw,test_raw = load_wikIR(config["collection_path"])
     
     glove_embedding = mz.datasets.embeddings.load_glove_embedding(dimension=300)
     task = mz.tasks.Ranking(loss=mz.losses.RankCrossEntropyLoss(num_neg=4))
-    IR_models = [mz.models.list_available()[i] for i in [6,7,8,10,14]]
+    IR_models = [mz.models.list_available()[i] for i in config["index_mz_models"]]
     
     for run in range(args.nb_runs):    
         for model_class in IR_models:
             print(model_class.__name__)
 
 
-            validation_path = args.data + '/validation/' + model_class.__name__
+            validation_path = config["collection_path"] + '/validation/' + model_class.__name__
 
             if not os.path.exists(validation_path):
                 os.mkdir(validation_path)
 
-            test_path = args.data + '/test/' + model_class.__name__
+            test_path = config["collection_path"] + '/test/' + model_class.__name__
 
             if not os.path.exists(test_path):
                 os.mkdir(test_path)
@@ -166,35 +170,35 @@ def main():
                                       validation_path,
                                       run,
                                       0,
-                                      args.data,
-                                      args.data + '/validation/qrels')
+                                      config["collection_path"],
+                                      config["collection_path"] + '/validation/qrels')
 
             evaluate_and_save_results(model,
                                       test_gen,
                                       test_path,
                                       run,
                                       0,
-                                      args.data,
-                                      args.data + '/test/qrels')
+                                      config["collection_path"],
+                                      config["collection_path"] + '/test/qrels')
 
             for _ in range(10):
-                model.fit_generator(train_gen, epochs=2)
+                model.fit_generator(train_gen, epochs=2,verbose = 0)
 
                 evaluate_and_save_results(model,
                                           validation_gen,
                                           validation_path,
                                           run,
                                           (1+_)*2,
-                                          args.data,
-                                          args.data + '/validation/qrels')
+                                          config["collection_path"],
+                                          config["collection_path"] + '/validation/qrels')
 
                 evaluate_and_save_results(model,
                                           test_gen,
                                           test_path,
                                           run,
                                           (1+_)*2,
-                                          args.data,
-                                          args.data + '/test/qrels')
+                                          config["collection_path"],
+                                          config["collection_path"] + '/test/qrels')
     
 if __name__ == "__main__":
     main()
