@@ -167,7 +167,7 @@ COLLECTION_PATH is the directory where the datasets will be stored
 
 You can download the dev dataset [here](https://zenodo.org/record/3545871#.XdKJAtF7k5k).
 
-You can download the dataset **TBD**
+You can download the full dataset **TBD**
 
 # Citation
 
