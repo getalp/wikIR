@@ -3,14 +3,13 @@ A python tool for building a large scale Wikipedia-based Information Retrieval d
 
 # Requirements
   * Python 3.6+
-  * [NumPy](https://numpy.org)
+  * [NumPy](https://numpy.org) and [scipy](https://www.scipy.org) 
   * [pytrec_eval](https://github.com/cvangysel/pytrec_eval) to evaluate the runs 
   * [nltk](https://www.nltk.org/) library to use PorterStemmer and perform stopword removal
   * [Pandas](https://pandas.pydata.org) library to be able to save the dataset as a dataframe compatible with [MatchZoo](https://github.com/NTMC-Community/MatchZoo) 
   * **Optional**:
     * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
     * [MatchZoo](https://github.com/NTMC-Community/MatchZoo) in order to train and evaluate neural networks on the collection
-    * [scipy](https://www.scipy.org) to compute statistical significance tests
 
 # Installation
 
