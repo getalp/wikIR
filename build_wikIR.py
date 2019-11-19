@@ -162,7 +162,7 @@ def delete_empty(documents,queries,qrels):
             nb_empty += 1 
             empty_documents.add(key)
     
-    print(nb_empty,'empty documents have been deleted')
+    print(nb_empty,'empty documents have been deleted',flush=True)
     
     nb_empty = 0
     for key in [elem for elem in queries]:
@@ -171,9 +171,9 @@ def delete_empty(documents,queries,qrels):
             del qrels[key]
             nb_empty += 1
     
-    print(nb_empty,'empty queries have been deleted')
-    print('There are',len(documents),'documents')
-    print('There are',len(queries),'queries')
+    print(nb_empty,'empty queries have been deleted',flush=True)
+    print('There are',len(documents),'documents',flush=True)
+    print('There are',len(queries),'queries',flush=True)
     
     nb_paires = 0
     for key in [elem for elem in qrels]:
@@ -513,13 +513,13 @@ def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test
         corpus.append(value.split(" "))
     bm25 = BM25Okapi(corpus)
     
-    print("Running BM25")
+    print("Running BM25",flush=True)
     
     results = dict()
     for i,elem in enumerate(train):
         results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k)
         if i%1000==0:
-            print('Processing query',i,'/',len(train))
+            print('Processing query',i,'/',len(train),flush=True)
     save_BM25_res(output_dir+'/train/BM25.res',results)
     save_BM25_qrels_dataframe(output_dir + '/train/BM25.qrels.csv',results,qrels,True)
     
@@ -560,7 +560,7 @@ def main():
     args = parser.parse_args()
         
     if not os.path.exists(args.output_dir):
-        print(args.output_dir,"directory does not exist.\nCreating",args.output_dir, 'directory')
+        print(args.output_dir,"directory does not exist.\nCreating",args.output_dir, 'directory',flush=True)
         os.mkdir(args.output_dir)
         os.mkdir(args.output_dir + '/train')
         os.mkdir(args.output_dir + '/validation')
@@ -568,22 +568,22 @@ def main():
     
     random.seed(args.random_seed)
     
-    print("Reading wikiextractor file")
+    print("Reading wikiextractor file",flush=True)
     documents,documents_ids = read_wikiextractor(args.input,
                                                  args.min_len_doc,
                                                  args.max_docs)
     print(len(documents),"documents have more than",args.min_len_doc,"tokens")
     
-    print("Building qrels")
+    print("Building qrels",flush=True)
     qrels = build_qrels(documents,
                         documents_ids,
                         args.len_doc,
                         args.min_nb_rel_doc,
                         args.only_first_links)
     
-    print(len(qrels),"qrels have been built")
+    print(len(qrels),"qrels have been built",flush=True)
         
-    print("Cleaning queries and documents")
+    print("Cleaning queries and documents",flush=True)
     documents,queries = clean_docs_and_build_queries(qrels,
                                                     documents,
                                                     args.len_doc,
@@ -592,30 +592,30 @@ def main():
                                                     args.title_queries,
                                                     args.lower_cased)
     
-    print('Removing empty documents and queries')
+    print('Removing empty documents and queries',flush=True)
     documents,queries,qrels = delete_empty(documents,queries,qrels)
     
     train,validation,test = build_train_validation_test(queries,args.validation_part,args.test_part)
     
     if args.json:
-        print('Saving collection with json format')
+        print('Saving collection with json format',flush=True)
         save_json(args.output_dir,documents,queries,train,validation,test)
     
     elif args.xml:
-        print('Saving collection with xml format')
+        print('Saving collection with xml format',flush=True)
         save_xml(args.output_dir,documents,queries,train,validation,test)
     
     else: 
-        print('Saving collection with csv format')
+        print('Saving collection with csv format',flush=True)
         save_csv(args.output_dir,documents,queries,train,validation,test)
 
     save_all_qrel(args.output_dir,qrels,train,validation,test)
     
     if args.bm25:
-        print('Building index')
+        print('Building index',flush=True)
         run_BM25_collection(args.output_dir,documents,queries,qrels,train,validation,test,args.k)
 
-        print('Evaluating BM25 results')
+        print('Evaluating BM25 results',flush=True)
         evaluate(args.output_dir + '/train/BM25.metrics.json',
                  args.output_dir + '/train/qrels',
                  args.output_dir + '/train/BM25.res')
