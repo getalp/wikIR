@@ -156,12 +156,13 @@ rm wiki.json
 
 To reproduce the same datasets we used in our experiment just call the following script
 
-
 ```bash
 ./reproduce.sh COLLECTION_PATH
 ```
-
 COLLECTION_PATH is the directory where the datasets will be stored
+
+
+
 
 # Downloads
 
