@@ -182,7 +182,7 @@ def main():
                                       config["collection_path"] + '/test/qrels')
 
             for _ in range(10):
-                model.fit_generator(train_gen, epochs=2,verbose = 1)
+                model.fit_generator(train_gen, epochs=2)
 
                 evaluate_and_save_results(model,
                                           validation_gen,
