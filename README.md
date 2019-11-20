@@ -167,6 +167,14 @@ rm enwiki-20191101-pages-articles-multistream.xml
 rm wiki.json
 ```
 
+## Downloads
+
+The *dev-wikIR* and *full-wikIR* datasets presented in our paper (link:TBD) are available for download
+
+You can download *dev-wikIR* [here](https://zenodo.org/record/3547440#.XdPXbtF7k5l).
+
+You can download *full-wikIR* [here](https://zenodo.org/record/3548130#.XdTmY9F7k5k)
+
 ## Reproducibility
 
 ### Reproduce *dev-wikIR* dataset
@@ -185,6 +193,7 @@ rm enwiki.json
 
 COLLECTION_PATH is the directory where *dev-wikIR* will be stored
 
+
 ### Reproduce *full-wikIR* dataset
 
 To reproduce the *full-wikIR* dataset, execute the follwing lines in the wikIR directory
@@ -201,11 +210,12 @@ rm enwiki.json
 
 COLLECTION_PATH is the directory where *full-wikIR* will be stored
 
-:warning: bm25 can take several days to solve all the queires on *full-wikIR* :warning:
+:warning: bm25 can take several days to solve all the queires on *full-wikIR*, therefore the bm25 results files are provided in the dowloadable datasets.
+
 
 ### Reproduce both datasets
 
-To create both *dev-wikIR* and *full-wikIR* datasets we use in our paper (link:TBD) just call the following script
+To create both *dev-wikIR* and *full-wikIR* datasets just call the following script
 
 ```bash
 ./reproduce_datasets.sh COLLECTION_PATH
@@ -218,6 +228,7 @@ To reproduce our results with matchzoo models on the dev dataset, call
 ```bash
 python matchzoo_experiment.py -c config.json
 ```
+:warning: bm25 results files are needed by matchzoo_experiment.py 
 
 ### Display results
 To compute statistical significance against BM25 with Student t-test with Bonferroni correction 
@@ -227,12 +238,6 @@ and display the results of the dev dataset, call
 python display_res.py -c config.json
 ```
 :warning: Change "collection_path" in the config.json file if you want to train and display results on the full dataset
-
-## Downloads
-
-You can download the dev dataset [here](https://zenodo.org/record/3547440#.XdPXbtF7k5l).
-
-You can download the full dataset [here](https://zenodo.org/record/3548130#.XdTmY9F7k5k)
 
 ## Citation
 
