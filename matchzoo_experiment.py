@@ -112,7 +112,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c','--config', nargs="?", type=str)
     parser.add_argument('-gpu','--gpu', nargs="?", type=str, default = None)
-    parser.add_argument('-runs','--nb_runs', nargs="?", type=int, default = 3)
+    parser.add_argument('-runs','--nb_runs', nargs="?", type=int, default = 5)
     args = parser.parse_args()
     
     config = json.load(open(args.config,'r'))
@@ -182,7 +182,7 @@ def main():
                                       config["collection_path"] + '/test/qrels')
 
             for _ in range(10):
-                model.fit_generator(train_gen, epochs=2,verbose = 0)
+                model.fit_generator(train_gen, epochs=2,verbose = 1)
 
                 evaluate_and_save_results(model,
                                           validation_gen,
