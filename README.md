@@ -171,7 +171,39 @@ rm wiki.json
 
 ### Datasets and BM25
 
-To reproduce the same datasets we used in our paper (link:TBD) just call the following script
+To reproduce the dev-wikIR dataset, execute the follwing lines in the wikIR directory
+
+```bash
+wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
+bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
+python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
+rm enwiki-20191101-pages-articles-multistream.xml.bz2
+rm enwiki-20191101-pages-articles-multistream.xml
+python build_wikIR.py -in enwiki.json -o PATH/dev_wikIR -maxd 100000 -val 100 -test 100 -title -first -skip -low -bm25
+rm enwiki.json
+```
+
+With PATH the path to the directory where you want dev-wikIR to be saved
+
+
+To reproduce the full-wikIR dataset, execute the follwing lines in the wikIR directory
+
+```bash
+wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
+bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
+python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
+rm enwiki-20191101-pages-articles-multistream.xml.bz2
+rm enwiki-20191101-pages-articles-multistream.xml
+python build_wikIR.py -in enwiki.json -o PATH/full_wikIR -val 100 -test 100 -title -first -skip -low -bm25
+rm enwiki.json
+```
+
+With PATH the path to the directory where you want full-wikIR to be saved
+
+
+
+
+To create both dev-wikIR and full-wikIR datasets we use in our paper (link:TBD) just call the following script
 
 ```bash
 ./reproduce_datasets.sh COLLECTION_PATH
