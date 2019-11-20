@@ -51,39 +51,40 @@ def main():
                         best_model = file
                         best_metric = val_res[config["optim_measure"]]
 
-            test_res = json.load(open(test_path + '/' + best_model,'r'))
-            all_res[model_class.__name__] = [best_model,test_res]
+            if best_model != "" and os.path.exists(test_path + '/' + best_model):
+                test_res = json.load(open(test_path + '/' + best_model,'r'))
+                all_res[model_class.__name__] = [best_model,test_res]
 
-            with open(config["collection_path"] + '/test/' + model_class.__name__ + '/' + best_model[:-12] + 'res', 'r') as f_run:
-                run = pytrec_eval.parse_run(f_run)
+                with open(config["collection_path"] + '/test/' + model_class.__name__ + '/' + best_model[:-12] + 'res', 'r') as f_run:
+                    run = pytrec_eval.parse_run(f_run)
 
-            results = evaluator.evaluate(run)
+                results = evaluator.evaluate(run)
 
-            query_ids = list(set(bm25_results.keys()) & set(results.keys()))
+                query_ids = list(set(bm25_results.keys()) & set(results.keys()))
 
-            _ = ""
+                _ = ""
 
-            for key,value in test_res.items():
-                if key in config["print_measures"]:
-                    bm25_scores = [bm25_results[query_id][key] for query_id in query_ids]
-                    scores = [results[query_id][key] for query_id in query_ids]
-                    test = scipy.stats.ttest_rel(bm25_scores, scores)
-                    _ += str(value)[:6]
-                    if test[0] < 0:
-                        if test[1] < 0.01/len(config["print_measures"]):
-                            _ += "\\textsuperscript{\\textbf{++}}"
-                        elif test[1] < 0.05/len(config["print_measures"]):
-                            _ += "\\textsuperscript{\\textbf{+}}"
+                for key,value in test_res.items():
+                    if key in config["print_measures"]:
+                        bm25_scores = [bm25_results[query_id][key] for query_id in query_ids]
+                        scores = [results[query_id][key] for query_id in query_ids]
+                        test = scipy.stats.ttest_rel(bm25_scores, scores)
+                        _ += str(value)[:6]
+                        if test[0] < 0:
+                            if test[1] < 0.01/len(config["print_measures"]):
+                                _ += "\\textsuperscript{\\textbf{++}}"
+                            elif test[1] < 0.05/len(config["print_measures"]):
+                                _ += "\\textsuperscript{\\textbf{+}}"
 
-                    else:
-                        if test[1] < 0.01/len(config["print_measures"]):
-                            _ += "\\textsuperscript{\\textbf{-\,-}}"
-                        elif test[1] < 0.05/len(config["print_measures"]):
-                            _ += "\\textsuperscript{\\textbf{-}}"
+                        else:
+                            if test[1] < 0.01/len(config["print_measures"]):
+                                _ += "\\textsuperscript{\\textbf{-\,-}}"
+                            elif test[1] < 0.05/len(config["print_measures"]):
+                                _ += "\\textsuperscript{\\textbf{-}}"
 
-                    _ +=  " & "
+                        _ +=  " & "
 
-            print(model_class.__name__ + ' & ' + _[:-2] + '\\\\' )
+                print(model_class.__name__ + ' & ' + _[:-2] + '\\\\' )
 
 if __name__ == "__main__":
     main()
