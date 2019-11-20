@@ -169,7 +169,7 @@ rm wiki.json
 
 ## Reproducibility
 
-### Datasets and BM25
+### Reproduce *dev-wikIR* dataset
 
 To reproduce the *dev-wikIR* dataset, execute the follwing lines in the wikIR directory
 
@@ -185,6 +185,7 @@ rm enwiki.json
 
 COLLECTION_PATH is the directory where *dev-wikIR* will be stored
 
+### Reproduce *full-wikIR* dataset
 
 To reproduce the *full-wikIR* dataset, execute the follwing lines in the wikIR directory
 
@@ -201,6 +202,8 @@ rm enwiki.json
 COLLECTION_PATH is the directory where *full-wikIR* will be stored
 
 :warning: bm25 can take several days to solve all the queires on *full-wikIR* :warning:
+
+### Reproduce both datasets
 
 To create both *dev-wikIR* and *full-wikIR* datasets we use in our paper (link:TBD) just call the following script
 
