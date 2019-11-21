@@ -139,6 +139,8 @@ optional argument:
 
 ## Example
 
+Execute the follwing lines in the wikIR directory
+
 Download the english wikipedia dump from 01/11/2019
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
@@ -151,12 +153,12 @@ bzip2 -dk enwiki-20191101-pages-articles-multistream.xml.bz2
 
 Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
-python wikIR/wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
+python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 ```
 
 Use wikIR builder
 ```bash
-python wikIR/build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low
+python build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low -bm25 -maxd 100000
 ```
 
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
@@ -166,6 +168,18 @@ rm enwiki-20191101-pages-articles-multistream.xml.bz2
 rm enwiki-20191101-pages-articles-multistream.xml
 rm wiki.json
 ```
+Train and evaluate neural networks with Matchzoo
+
+```bash
+python wikIR/matchzoo_experiment.py -c config.json
+```
+
+Display results in a latex table
+
+```bash
+python wikIR/display_res.py -c config.json
+```
+
 
 ## Downloads
 
