@@ -174,7 +174,7 @@ Train and evaluate neural networks with Matchzoo
 python wikIR/matchzoo_experiment.py -c config.json
 ```
 
-Display results in a latex table
+Display results in a format compatible with a latex table
 
 ```bash
 python wikIR/display_res.py -c config.json
