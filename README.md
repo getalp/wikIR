@@ -10,6 +10,7 @@ A python toolkit for building a large scale Wikipedia-based Information Retrieva
 6. [Reproducibility](#Reproducibility)
 7. [Downloads](#Downloads)
 8. [Citation](#Citation)
+9. [References](#References)
 
 ## Requirements
   * Python 3.6+
@@ -260,6 +261,7 @@ If you use wikIR tool or the dataset we provide to produce results for your scie
 **TDB**
 
 *****
+## References
 
 [1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
 
