@@ -158,7 +158,7 @@ python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python build_wikIR.py -in enwiki.json -out data -ld 200 -title -first -skip -low -bm25 -maxd 100000
+python build_wikIR.py -in enwiki.json -out wikIR1k -ld 200 -title -first -skip -low -bm25 -maxd 100000
 ```
 
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
@@ -183,17 +183,17 @@ python wikIR/display_res.py -c config.json
 
 ## Downloads
 
-The *dev-wikIR* and *full-wikIR* datasets presented in our paper (link:TBD) are available for download
+The *wikIR1k* and *wikIR59k* datasets presented in our paper (link:TBD) are available for download
 
-You can download *dev-wikIR* [here](https://zenodo.org/record/3547440#.XdPXbtF7k5l).
+You can download *wikIR1k* [here](https://zenodo.org/record/3552249#.XdukNNF7k5k).
 
-You can download *full-wikIR* [here](https://zenodo.org/record/3548130#.XdTmY9F7k5k)
+You can download *wikIR59k* [here](https://zenodo.org/record/3548130#.XdTmY9F7k5k)
 
 ## Reproducibility
 
-### Reproduce *dev-wikIR* dataset
+### Reproduce *wikIR1k* dataset
 
-To reproduce the *dev-wikIR* dataset, execute the follwing lines in the wikIR directory
+To reproduce the *wikIR1k* dataset, execute the follwing lines in the wikIR directory
 
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
@@ -201,16 +201,16 @@ bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
 python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 rm enwiki-20191101-pages-articles-multistream.xml.bz2
 rm enwiki-20191101-pages-articles-multistream.xml
-python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/dev_wikIR -maxd 100000 -val 100 -test 100 -title -first -skip -low -bm25
+python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/wikIR1k -maxd 100000 -val 100 -test 100 -title -first -skip -low -bm25
 rm enwiki.json
 ```
 
 COLLECTION_PATH is the directory where *dev-wikIR* will be stored
 
 
-### Reproduce *full-wikIR* dataset
+### Reproduce *wikIR59k* dataset
 
-To reproduce the *full-wikIR* dataset, execute the follwing lines in the wikIR directory
+To reproduce the *wikIR59k* dataset, execute the follwing lines in the wikIR directory
 
 ```bash
 wget https://dumps.wikimedia.org/enwiki/20191101/enwiki-20191101-pages-articles-multistream.xml.bz2
@@ -218,18 +218,18 @@ bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
 python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 rm enwiki-20191101-pages-articles-multistream.xml.bz2
 rm enwiki-20191101-pages-articles-multistream.xml
-python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/full_wikIR -val 100 -test 100 -title -first -skip -low -bm25
+python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/wikIR59k -val 100 -test 100 -title -first -skip -low -bm25
 rm enwiki.json
 ```
 
-COLLECTION_PATH is the directory where *full-wikIR* will be stored
+COLLECTION_PATH is the directory where *wikIR59k* will be stored
 
-:warning: bm25 can take several days to solve all the queires on *full-wikIR*, therefore the bm25 results files are provided in the dowloadable datasets.
+:warning: bm25 can take several days to solve all the queires on *wikIR59k*, therefore the bm25 results files are provided in the dowloadable datasets.
 
 
 ### Reproduce both datasets
 
-To create both *dev-wikIR* and *full-wikIR* datasets just call the following script
+To create both *wikIR1k* and *wikIR59k* datasets just call the following script
 
 ```bash
 ./reproduce_datasets.sh COLLECTION_PATH
