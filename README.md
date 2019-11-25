@@ -133,7 +133,7 @@ optional argument:
 
 *****
 ## Details
-  * The data construction process is similar to [1] and [2]
+  * The data construction process is similar to [1](https://cs.jhu.edu/~kevinduh/papers/sasaki18letor.pdf) and [2](https://pdfs.semanticscholar.org/5b5a/83e5ad9f4096cd6286ec11c31d796c82bcd0.pdf)
   * Article used to build the documents (article titles are removed from documents)	
   * Title or first sentence of each article is used to build the queries
   * We assign a **relevance of 2** if the query and document were extracted from the **same article**
