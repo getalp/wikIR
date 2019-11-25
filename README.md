@@ -22,6 +22,7 @@ A python toolkit for building a large scale Wikipedia-based Information Retrieva
     * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
     * [MatchZoo](https://github.com/NTMC-Community/MatchZoo) in order to train and evaluate neural networks on the collection
 
+*****
 ## Installation
 
 Install wikIR
@@ -42,6 +43,7 @@ git clone https://github.com/NTMC-Community/MatchZoo.git
 cd MatchZoo
 python setup.py install
 ```
+*****
 ## Usage
 
   * Download and extract a XML wikipedia dump file from [here](https://dumps.wikimedia.org/backup-index.html) 
@@ -129,6 +131,7 @@ optional argument:
         
 ```
 
+*****
 ## Details
   * The data construction process is similar to [1] and [2]
   * Article used to build the documents (article titles are removed from documents)	
@@ -138,6 +141,7 @@ optional argument:
     * For example the document [Autism](https://en.wikipedia.org/wiki/Autism) is relevant to the query [Developmental disorder](https://en.wikipedia.org/wiki/Developmental_disorder).
 
 
+*****
 ## Example
 
 Execute the follwing lines in the wikIR directory
@@ -182,6 +186,7 @@ python wikIR/display_res.py -c config.json
 ```
 
 
+*****
 ## Downloads
 
 The *wikIR1k* and *wikIR59k* datasets presented in our paper (link:TBD) are available for download
@@ -190,6 +195,7 @@ You can download *wikIR1k* [here](https://zenodo.org/record/3552249#.XdukNNF7k5k
 
 You can download *wikIR59k* [here](https://zenodo.org/record/3552280#.Xduwn-ZKg5l).
 
+*****
 ## Reproducibility
 
 ### Reproduce *wikIR1k* dataset
@@ -254,6 +260,7 @@ python display_res.py -c config.json
 ```
 :warning: Change "collection_path" in the config.json file if you want to train and display results on the full dataset
 
+*****
 ## Citation
 
 If you use wikIR tool or the dataset we provide to produce results for your scientific publication, please refer to our paper:
