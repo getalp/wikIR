@@ -187,7 +187,7 @@ The *wikIR1k* and *wikIR59k* datasets presented in our paper (link:TBD) are avai
 
 You can download *wikIR1k* [here](https://zenodo.org/record/3552249#.XdukNNF7k5k).
 
-You can download *wikIR59k* [here](https://zenodo.org/record/3548130#.XdTmY9F7k5k)
+You can download *wikIR59k* [here](https://zenodo.org/record/3552280#.Xduwn-ZKg5l).
 
 ## Reproducibility
 
