@@ -205,7 +205,7 @@ python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/wikIR1k -maxd 100000 
 rm enwiki.json
 ```
 
-COLLECTION_PATH is the directory where *dev-wikIR* will be stored
+COLLECTION_PATH is the directory where *wikIR1k* will be stored
 
 
 ### Reproduce *wikIR59k* dataset
