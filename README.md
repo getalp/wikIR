@@ -270,6 +270,6 @@ If you use wikIR tool or the dataset we provide to produce results for your scie
 *****
 ## References
 
-[1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations
+[1] Shota Sasaki, Shuo Sun, Shigehiko Schamoni, Kevin Duh, and Kentaro Inui. 2018. Cross-lingual learning-to-rank with shared representations, [pdf](https://cs.jhu.edu/~kevinduh/papers/sasaki18letor.pdf)
 
-[2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval.
+[2] Shigehiko Schamoni, Felix Hieber, Artem Sokolov, and Stefan Riezler. 2014. Learning translational and knowledge-based similarities from relevance rankings for cross-language retrieval, [pdf](https://pdfs.semanticscholar.org/5b5a/83e5ad9f4096cd6286ec11c31d796c82bcd0.pdf)
