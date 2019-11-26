@@ -55,12 +55,12 @@ Where input is the XML wikipedia dump file and output is the output in json form
 
   * Call our script
 ```
-python build_wikIR.py [-in,--input] [-out,--output_dir] 
-                      [-maxd,--max_docs] [-ld,--len_doc] [-lq,--len_query] [-mlen,--min_len_doc]
-                      [-mrel,--min_nb_rel_doc] [-val,--validation_part] [-test,--test_part]
-                      [-k,--k] [-title,--title_queries] [-first,--only_first_links] 
-                      [-skip,--skip_first_sentence] [-low,--lower_cased] [-json,--json] 
-                      [-xml,--xml] [-bm25,--bm25] [-rand,--random_seed] 
+python build_wikIR.py [-i,--input] [-o,--output_dir] 
+                      [-m,--max_docs] [-d,--len_doc] [-q,--len_query] [-l,--min_len_doc]
+                      [-e,--min_nb_rel_doc] [-v,--validation_part] [-t,--test_part]
+                      [-k,--k] [-i,--title_queries] [-f,--only_first_links] 
+                      [-s,--skip_first_sentence] [-c,--lower_cased] [-j,--json] 
+                      [-x,--xml] [-b,--bm25] [-r,--random_seed] 
 ```
 
 ```
@@ -163,7 +163,7 @@ python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python build_wikIR.py -in enwiki.json -out wikIR1k -title -first -skip -low -bm25 -maxd 370000
+python build_wikIR.py --input enwiki.json --output_dir wikIR1k --max_docs 370000 -tfscb 
 ```
 
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
