@@ -163,7 +163,7 @@ python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream
 
 Use wikIR builder
 ```bash
-python build_wikIR.py -in enwiki.json -out wikIR1k -ld 200 -title -first -skip -low -bm25 -maxd 100000
+python build_wikIR.py -in enwiki.json -out wikIR1k -title -first -skip -low -bm25 -maxd 370000
 ```
 
 :warning: **Do not forget to delete the dowloaded and intermediary files** :warning:
