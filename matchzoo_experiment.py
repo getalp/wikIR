@@ -111,8 +111,8 @@ def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument('-c','--config', nargs="?", type=str)
-    parser.add_argument('-gpu','--gpu', nargs="?", type=str, default = None)
-    parser.add_argument('-runs','--nb_runs', nargs="?", type=int, default = 5)
+    parser.add_argument('-g','--gpu', nargs="?", type=str, default = None)
+    parser.add_argument('-r','--nb_runs', nargs="?", type=int, default = 5)
     args = parser.parse_args()
     
     config = json.load(open(args.config,'r'))
