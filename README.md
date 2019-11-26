@@ -133,7 +133,7 @@ optional argument:
 
 *****
 ## Details
-  * The data construction process is similar to [1] and [2]
+  * The data construction process is similar to [[1]](#References) and [[2]](#References)
   * Article used to build the documents (article titles are removed from documents)	
   * Title or first sentence of each article is used to build the queries
   * We assign a **relevance of 2** if the query and document were extracted from the **same article**
