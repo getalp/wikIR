@@ -6,8 +6,8 @@ python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream
 
 rm enwiki-20191101-pages-articles-multistream.xml
 
-python build_wikIR.py -in enwiki.json -o $1/wikIR1k -maxd 100000 -val 100 -test 100 -title -first -skip -low -bm25
+python build_wikIR.py -in enwiki.json -o $1/wikIR1k -maxd 370000 -val 100 -test 100 -title -first -skip -low -bm25
 
-python build_wikIR.py -in enwiki.json -o $1/wikIR59k -title -first -skip -low -bm25
+python build_wikIR.py -in enwiki.json -o $1/wikIR59k -val 1000 -test 1000 -title -first -skip -low -bm25
 
 rm enwiki.json
