@@ -158,7 +158,7 @@ bzip2 -dk enwiki-20191101-pages-articles-multistream.xml.bz2
 
 Use Wikiextractor (ignore the WARNING: Template errors in article)
 ```bash
-python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
+python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output --bytes 100G --links --quiet --json > enwiki.json
 ```
 
 Use wikIR builder
@@ -208,7 +208,7 @@ bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
 python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 rm enwiki-20191101-pages-articles-multistream.xml.bz2
 rm enwiki-20191101-pages-articles-multistream.xml
-python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/wikIR1k -maxd 370000 -val 100 -test 100 -title -first -skip -low -bm25
+python build_wikIR.py --input enwiki.json --output_dir COLLECTION_PATH/wikIR1k --max_docs 370000 --validation_part 100 --test_part 100 -tfscb
 rm enwiki.json
 ```
 
@@ -225,7 +225,7 @@ bzip2 -d enwiki-20191101-pages-articles-multistream.xml.bz2
 python wikiextractor/WikiExtractor.py enwiki-20191101-pages-articles-multistream.xml --output - --bytes 100G --links --quiet --json > enwiki.json
 rm enwiki-20191101-pages-articles-multistream.xml.bz2
 rm enwiki-20191101-pages-articles-multistream.xml
-python build_wikIR.py -in enwiki.json -out COLLECTION_PATH/wikIR59k -val 1000 -test 1000 -title -first -skip -low -bm25
+python build_wikIR.py --input enwiki.json --output_dir COLLECTION_PATH/wikIR59k --validation_part 1000 --test_part 1000 -tfscb
 rm enwiki.json
 ```
 
