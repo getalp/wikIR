@@ -192,7 +192,7 @@ def delete_empty(documents,queries,qrels):
 
 
 
-"""Separates the dataset between train, validation and test.
+"""Separates the dataset between training, validation and test.
     
     Args:
         (dict) documents: output of clean_docs_and_build_queries
@@ -235,7 +235,7 @@ def save_csv(output_dir,documents,queries,train,validation,test):
     
     index = pd.Index([key for key in train],name = 'id_left')
     d = {"text_left":[queries[key] for key in train]}
-    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/train/queries.csv')
+    pd.DataFrame(data=d,index=index).to_csv(output_dir + '/training/queries.csv')
     
     index = pd.Index([key for key in validation],name = 'id_left')
     d = {"text_left":[queries[key] for key in validation]}
@@ -263,7 +263,7 @@ def save_json(output_dir,documents,queries,train,validation,test):
     with open(output_dir + '/documents.json','w') as f:
         json.dump(documents, f)
 
-    with open(output_dir + '/train/queries.json','w') as f:
+    with open(output_dir + '/training/queries.json','w') as f:
         json.dump({key:queries[key] for key in train}, f)
 
     with open(output_dir + '/validation/queries.json','w') as f:
@@ -290,15 +290,15 @@ def save_xml(output_dir,documents,queries,train,validation,test):
         for key,value in documents.items():
             f.write('<DOC>\n<DOCNO>' + str(key) + '</DOCNO>\n<TEXT>\n' + value + '\n</TEXT></DOC>\n')
 
-    with open(output_dir + '/train.queries.xml','w') as f:
+    with open(output_dir + '/training/queries.xml','w') as f:
         for key in train:
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
 
-    with open(output_dir + '/validation.queries.xml','w') as f:
+    with open(output_dir + '/validation/queries.xml','w') as f:
         for key in validation:
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
 
-    with open(output_dir + '/test.queries.xml','w') as f:
+    with open(output_dir + '/test/queries.xml','w') as f:
         for key in test:
             f.write('<top>\n<num>' + str(key) + '</num><title>\n' + queries[key] + '\n</title>\n</top>\n')
     
@@ -332,7 +332,7 @@ def save_qrel(output_dir,file_name,qrels,subset):
                 
 """                      
 def save_all_qrel(output_dir,qrels,train,validation,test):
-    save_qrel(output_dir,'train/',qrels,train)
+    save_qrel(output_dir,'training/',qrels,train)
     save_qrel(output_dir,'validation/',qrels,validation)
     save_qrel(output_dir,'test/',qrels,test)
 
@@ -374,7 +374,7 @@ def save_qrel_csv(output_dir,file_name,qrels,subset):
                 
 """       
 def save_all_qrel_csv(output_dir,qrels,train,validation,test):
-    save_qrel_csv(output_dir,'train/',qrels,train)
+    save_qrel_csv(output_dir,'training/',qrels,train)
     save_qrel_csv(output_dir,'validation/',qrels,validation)
     save_qrel_csv(output_dir,'test/',qrels,test)
     
@@ -520,8 +520,8 @@ def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test
         results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k)
         if i%1000==0:
             print('Processing query',i,'/',len(train),flush=True)
-    save_BM25_res(output_dir+'/train/BM25.res',results)
-    save_BM25_qrels_dataframe(output_dir + '/train/BM25.qrels.csv',results,qrels,True)
+    save_BM25_res(output_dir+'/training/BM25.res',results)
+    save_BM25_qrels_dataframe(output_dir + '/training/BM25.qrels.csv',results,qrels,True)
     
     results = dict()
     for elem in validation:
@@ -562,7 +562,7 @@ def main():
     if not os.path.exists(args.output_dir):
         print(args.output_dir,"directory does not exist.\nCreating",args.output_dir, 'directory',flush=True)
         os.mkdir(args.output_dir)
-        os.mkdir(args.output_dir + '/train')
+        os.mkdir(args.output_dir + '/training')
         os.mkdir(args.output_dir + '/validation')
         os.mkdir(args.output_dir + '/test')
     
