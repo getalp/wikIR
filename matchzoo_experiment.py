@@ -21,9 +21,9 @@ import matchzoo as mz
 
 def load_wikIR(collection_path):
     
-    left = pd.read_csv(collection_path + '/train/queries.csv',index_col='id_left')
+    left = pd.read_csv(collection_path + '/training/queries.csv',index_col='id_left')
     right = pd.read_csv(collection_path + '/documents.csv',index_col='id_right')
-    relation = pd.read_csv(collection_path + '/train/BM25.qrels.csv',index_col=0)
+    relation = pd.read_csv(collection_path + '/training/BM25.qrels.csv',index_col=0)
     train_raw = mz.DataPack(left=left,right=right,relation=relation)
     
     left = pd.read_csv(collection_path + '/validation/queries.csv',index_col='id_left')
