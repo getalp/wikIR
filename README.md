@@ -263,9 +263,18 @@ python display_res.py -c config.json
 *****
 ## Citation
 
-If you use wikIR tool or the dataset we provide to produce results for your scientific publication, please refer to our paper:
+If you use wikIR tool or the dataset(s) we provide to produce results for your scientific publication, please refer to our paper:
 
-**TDB**
+```bash
+@misc{frej2019wikir,
+    title={WIKIR: A Python toolkit for building a large-scale Wikipedia-based English Information Retrieval Dataset},
+    author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
+    year={2019},
+    eprint={1912.01901},
+    archivePrefix={arXiv},
+    primaryClass={cs.IR}
+}
+```
 
 *****
 ## References
