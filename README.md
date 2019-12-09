@@ -263,7 +263,7 @@ python display_res.py -c config.json
 *****
 ## Citation
 
-If you use wikIR tool or the dataset(s) we provide to produce results for your scientific publication, please refer to our paper:
+If you use wikIR tool or the dataset(s) we provide to produce results for your scientific publication, please refer to our [paper](https://arxiv.org/abs/1912.01901v3):
 
 ```bash
 @misc{frej2019wikir,
