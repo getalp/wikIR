@@ -199,7 +199,7 @@ You can download *wikIR59k* [here](https://zenodo.org/record/3557342#.XeD3c-ZKg5
 *****
 ## More languages
 
-Datasets in more languages are also availalbe:
+Datasets in more languages are also available:
 
 |   | English | French | Spanish | Italian |
 |:-------------:|:-------------:|:-------------:|:-----:|:-----:|
@@ -207,7 +207,7 @@ Datasets in more languages are also availalbe:
 | first sentence queries| [ENwikIRS59k](https://zenodo.org/record/3569708#.Xe_gT-ZKhhE) | [FRwikIRS14k](https://zenodo.org/record/3569720#.Xe_ga-ZKhhE) | [ESwikIRS13k](https://zenodo.org/record/3569726#.Xe_ggeZKhhE) | [ITwikIRS16k](https://zenodo.org/record/3569734#.Xe_gnOZKhhE) |
 
 
-We propose datasets with short and well defined queries made from titles (ENwikIR59k, FRwikIR14k) and datasets with long and noisy queries from fist sentences (ENwikIRS59k, FRwikIRS14k) to study robustness of IR models to noise.
+We propose datasets with short and well defined queries built from titles (ENwikIR59k, FRwikIR14k) and datasets with long and noisy queries built from first sentences (ENwikIRS59k, FRwikIRS14k) to study robustness of IR models to noise.
 
 
 *****
