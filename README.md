@@ -1,11 +1,11 @@
 # WIKIR
 A python toolkit for building a large scale Wikipedia-based Information Retrieval dataset
 
-Supported languages currently:
-English
-French
-Spanish
-Italian
+Currently supported languages:
+**English**  
+**French**  
+**Spanish**  
+**Italian**  
 
 # Table of Contents
 1. [Requirements](#Requirements)
