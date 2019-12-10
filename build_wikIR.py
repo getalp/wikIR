@@ -9,9 +9,10 @@ import pandas as pd
 from rank_bm25 import BM25Okapi
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+from nltk.stem.snowball import FrenchStemmer
+from nltk.stem.snowball import SpanishStemmer
+from nltk.stem.snowball import ItalianStemmer
 
-stop_words = set(stopwords.words('english'))
-stemmer = PorterStemmer()
 
 """Reads the file produced by wikiextract.
     
@@ -36,8 +37,14 @@ def read_wikiextractor(file,min_nb_words,max_docs):
             documents_ids[article['title']] = doc_id
             documents[doc_id] = text
             doc_id += 1
-            if max_docs==doc_id : break
-    return documents,documents_ids
+            
+    if max_docs:
+        titles = random.sample(documents_ids.keys(),k = max_docs)
+        documents_ids = {title: documents_ids[title] for title in titles}
+        documents = {d_id: documents[d_id] for d_id in documents_ids.values()}
+        return documents,documents_ids
+    else:
+        return documents,documents_ids
 
 
 
@@ -99,11 +106,16 @@ def build_qrels(documents,documents_ids,len_doc,min_rel,only_first_sentence):
         (dict) documents: keys are doc ids and values are cleaned text of wikipedia articles
         (dict) queries: keys are queries ids and values are cleaned text of queries
 """
-def clean_docs_and_build_queries(qrels,documents,len_doc,len_query,skip_first_sentence,title_queries,lower_cased):
+def clean_docs_and_build_queries(qrels,documents,len_doc,len_query,skip_first_sentence,title_queries,lower_cased,language):
     
     queries = dict()
-    regex = re.compile('[^a-zA-Z0-9]')
     
+    if language=='en':
+        regex = re.compile('[^a-zA-Z0-9]')
+
+    else:
+        regex = re.compile('[^a-zÀ-ÿA-Z0-9]')
+
     for key,value in documents.items():
         
         document = re.sub('<[^>]+>', '', value)
@@ -192,7 +204,7 @@ def delete_empty(documents,queries,qrels):
 
 
 
-"""Separates the dataset between training, validation and test.
+"""Separates the dataset between train, validation and test.
     
     Args:
         (dict) documents: output of clean_docs_and_build_queries
@@ -483,7 +495,24 @@ def evaluate(eval_path,qrel_path,res_path):
         (list) results: sorted list of doc_ids and their scores
                 
 """       
-def run_BM25_query(query,bm25,doc_indexes,k):
+def run_BM25_query(query,bm25,doc_indexes,k,language):
+    
+    if language=='en':
+        stop_words = set(stopwords.words('english'))
+        stemmer = PorterStemmer()
+    
+    elif language=='fr':
+        stop_words = set(stopwords.words('french'))
+        stemmer = FrenchStemmer()
+    
+    elif language=='es':
+        stop_words = set(stopwords.words('spanish'))
+        stemmer = SpanishStemmer()
+        
+    elif language=='it':
+        stop_words = set(stopwords.words('italian'))
+        stemmer = ItalianStemmer()
+    
     tokenized_query = [stemmer.stem(elem) for elem in query.split(" ") if elem not in stop_words]
     doc_scores = bm25.get_scores(tokenized_query)
     top_k = np.argsort(doc_scores)[::-1][:k]
@@ -504,7 +533,25 @@ def run_BM25_query(query,bm25,doc_indexes,k):
         (list) test: output of build_train_validation_test
                 
 """
-def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test,k):
+def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test,k,language):
+    
+    if language=='en':
+        stop_words = set(stopwords.words('english'))
+        stemmer = PorterStemmer()
+    
+    elif language=='fr':
+        stop_words = set(stopwords.words('french'))
+        stemmer = FrenchStemmer()
+    
+    elif language=='es':
+        stop_words = set(stopwords.words('spanish'))
+        stemmer = SpanishStemmer()
+        
+    elif language=='it':
+        stop_words = set(stopwords.words('italian'))
+        stemmer = ItalianStemmer()
+    
+    
     corpus = [] 
     doc_indexes = []
     for key,value in documents.items():
@@ -517,7 +564,7 @@ def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test
     
     results = dict()
     for i,elem in enumerate(train):
-        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k)
+        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k,language)
         if i%1000==0:
             print('Processing query',i,'/',len(train),flush=True)
     save_BM25_res(output_dir+'/training/BM25.res',results)
@@ -525,13 +572,13 @@ def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test
     
     results = dict()
     for elem in validation:
-        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k)
+        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k,language)
     save_BM25_res(output_dir+'/validation/BM25.res',results)
     save_BM25_qrels_dataframe(output_dir + '/validation/BM25.qrels.csv',results,qrels,False)
     
     results = dict()
     for elem in test:
-        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k)
+        results[elem] = run_BM25_query(queries[elem],bm25,doc_indexes,k,language)
     save_BM25_res(output_dir+'/test/BM25.res',results)
     save_BM25_qrels_dataframe(output_dir + '/test/BM25.qrels.csv',results,qrels,False)
 
@@ -541,15 +588,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--input', nargs="?", type=str)
     parser.add_argument('-o','--output_dir', nargs="?", type=str)
+    parser.add_argument('--language', nargs="?", type=str,choices=['en','fr','es','it'],default='en')
     parser.add_argument('-m','--max_docs', nargs="?", type=int, default = None)
     parser.add_argument('-d','--len_doc', nargs="?", type=int, default = 200)
-    parser.add_argument('-q','--len_query', nargs="?", type=int, default = None)
+    parser.add_argument('-q','--len_query', nargs="?", type=int, default = 10)
     parser.add_argument('-l','--min_len_doc', nargs="?", type=int, default = 200)
     parser.add_argument('-e','--min_nb_rel_doc', nargs="?", type=int, default = 5)
     parser.add_argument('-v','--validation_part', nargs="?", type=int,default = 1000)
     parser.add_argument('-t','--test_part', nargs="?", type=int,default = 1000)
     parser.add_argument('-k','--k', nargs="?", type=int,default = 100)
-    parser.add_argument('-i','--title_queries', action="store_true")
+    parser.add_argument('-u','--title_queries', action="store_true")
     parser.add_argument('-f','--only_first_links', action="store_true")
     parser.add_argument('-s','--skip_first_sentence', action="store_true")
     parser.add_argument('-c','--lower_cased', action="store_true")
@@ -558,7 +606,7 @@ def main():
     parser.add_argument('-b','--bm25', action="store_true")
     parser.add_argument('-r','--random_seed', nargs="?", type=int,default=27355)
     args = parser.parse_args()
-        
+                
     if not os.path.exists(args.output_dir):
         print(args.output_dir,"directory does not exist.\nCreating",args.output_dir, 'directory',flush=True)
         os.mkdir(args.output_dir)
@@ -590,7 +638,8 @@ def main():
                                                     args.len_query,
                                                     args.skip_first_sentence,
                                                     args.title_queries,
-                                                    args.lower_cased)
+                                                    args.lower_cased,
+                                                    args.language)
     
     print('Removing empty documents and queries',flush=True)
     documents,queries,qrels = delete_empty(documents,queries,qrels)
@@ -613,12 +662,12 @@ def main():
     
     if args.bm25:
         print('Building index',flush=True)
-        run_BM25_collection(args.output_dir,documents,queries,qrels,train,validation,test,args.k)
+        run_BM25_collection(args.output_dir,documents,queries,qrels,train,validation,test,args.k,args.language)
 
         print('Evaluating BM25 results',flush=True)
-        evaluate(args.output_dir + '/train/BM25.metrics.json',
-                 args.output_dir + '/train/qrels',
-                 args.output_dir + '/train/BM25.res')
+        evaluate(args.output_dir + '/training/BM25.metrics.json',
+                 args.output_dir + '/training/qrels',
+                 args.output_dir + '/training/BM25.res')
 
         evaluate(args.output_dir + '/validation/BM25.metrics.json',
                  args.output_dir + '/validation/qrels',
