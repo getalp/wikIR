@@ -73,67 +73,71 @@ python build_wikIR.py [-i,--input] [-o,--output_dir]
 ```
 arguments : 
 
-    [-i,--input]                 The json file produced by wikiextractor
+    [-i,--input]                  The json file produced by wikiextractor
     
-    [-o,--output_dir]           Directory where the collection will be stored
+    [-o,--output_dir]             Directory where the collection will be stored
 
 optional argument:
 
-    [-m,--max_docs]            Maximum number of documents in the collection
+    [--language]                  Language of the input json file
+                                  Possible values: 'en','fr','es','it'
+                                  Default value: 'en'
+
+    [-m,--max_docs]               Maximum number of documents in the collection
                                   Default value None
 
-    [-d,--len_doc]               Number of max tokens in documents
+    [-d,--len_doc]                Number of max tokens in documents
                                   Default value None: all tokens are preserved
                                   
-    [-q,--len_query]             Number of max tokens in queries
+    [-q,--len_query]              Number of max tokens in queries
                                   Default value None: all tokens are preserved
     
-    [-l,--min_len_doc]         Mininum number of tokens required for an article 
+    [-l,--min_len_doc]            Mininum number of tokens required for an article 
                                   to be added to the dataset as a document
                                   Default value 200
     
-    [-e,--min_nb_rel_doc]      Mininum number of relevant documents required for 
+    [-e,--min_nb_rel_doc]         Mininum number of relevant documents required for 
                                   a query to be added to the dataset
                                   Default value 5
     
-    [-v,--validation_part]      Number of queries in the validation set
+    [-v,--validation_part]        Number of queries in the validation set
                                   Default value 1000
     
-    [-t,--test_part]           Number of queries in the test set
+    [-t,--test_part]              Number of queries in the test set
                                   Default value 1000
     
-    [-i,--title_queries]      If used, queries are build using the title of 
+    [-i,--title_queries]          If used, queries are build using the title of 
                                   the article 
                                   If not used, queries are build using the first
                                   sentence of the article
     
-    [-f,--only_first_links]   If used, only the links in the first sentence of 
+    [-f,--only_first_links]       If used, only the links in the first sentence of 
                                   articles will be used to build qrels
                                   If not used, all links up to len_doc token will
                                   be used to build qrels
     
-    [-s,--skip_first_sentence] If used, the first sentence of articles is not 
+    [-s,--skip_first_sentence]    If used, the first sentence of articles is not 
                                   used in documents
     
-    [-c,--lower_cased]          If used, all characters are lowercase
+    [-c,--lower_cased]            If used, all characters are lowercase
     
-    [-j,--json]                If used, documents and queries are saved in json
+    [-j,--json]                   If used, documents and queries are saved in json
                                   If not used, documents and queries are saved in
                                   csv as dataframes compatible with matchzoo
                                   
-    [-x,--xml]                  If used, documents and queries are saved in xml
+    [-x,--xml]                    If used, documents and queries are saved in xml
                                   format compatible with Terrier IRS 
                                   If not used, documents and queries are saved in
                                   csv as dataframes compatible with matchzoo                                  
                                   
-    [-b,--bm25]                If used, perform and save results of BM25 ranking 
+    [-b,--bm25]                   If used, perform and save results of BM25 ranking 
                                   model on the collection
                                 
     [-k,--k]                      If BM25 is used, indicates the number of documents 
                                   per query saved 
                                   Default value 100
     
-    [-r,--random_seed]         Random seed
+    [-r,--random_seed]            Random seed
                                   Default value 27355
         
 ```
