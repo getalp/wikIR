@@ -189,11 +189,12 @@ python wikIR/display_res.py -c config.json
 *****
 ## Downloads
 
-The *wikIR1k* and *wikIR59k* datasets presented in our paper (link:TBD) are available for download
+The *wikIR1k* and *wikIR59k* datasets presented in our [paper](https://arxiv.org/abs/1912.01901) are available for download
 
 You can download *wikIR1k* [here](https://zenodo.org/record/3565761#.Xep7Z-ZKg5k).
 
 You can download *wikIR59k* [here](https://zenodo.org/record/3557342#.XeD3c-ZKg5k).
+
 
 *****
 ## Reproducibility
