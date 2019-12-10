@@ -9,8 +9,9 @@ A python toolkit for building a large scale Wikipedia-based Information Retrieva
 5. [Example](#Example)
 6. [Reproducibility](#Reproducibility)
 7. [Downloads](#Downloads)
-8. [Citation](#Citation)
-9. [References](#References)
+8. [More languages](#More-languages)
+9. [Citation](#Citation)
+10. [References](#References)
 
 ## Requirements
   * Python 3.6+
@@ -195,6 +196,15 @@ You can download *wikIR1k* [here](https://zenodo.org/record/3565761#.Xep7Z-ZKg5k
 
 You can download *wikIR59k* [here](https://zenodo.org/record/3557342#.XeD3c-ZKg5k).
 
+*****
+## More languages
+
+Datasets in more languages are also availalbe:
+
+|   | English | French | Spanish | Italian |
+|:-------------:|:-------------:|:-------------:|:-----:|:-----:|
+| title queries | [ENwikIR59k](https://zenodo.org/record/3557342#.Xe_gQ-ZKhhE) | [FRwikIR14k](https://zenodo.org/record/3569718#.Xe_gYOZKhhE) | [ESwikIR13k](https://zenodo.org/record/3569724#.Xe_geOZKhhE) | [ITwikIR16k](https://zenodo.org/record/3569732#.Xe_gj-ZKhhE) |
+| first sentence queries| [ENwikIRS59k](https://zenodo.org/record/3569708#.Xe_gT-ZKhhE) | [FRwikIRS14k](https://zenodo.org/record/3569720#.Xe_ga-ZKhhE) | [ESwikIRS13k](https://zenodo.org/record/3569726#.Xe_ggeZKhhE) | [ITwikIRS16k](https://zenodo.org/record/3569734#.Xe_gnOZKhhE) |
 
 *****
 ## Reproducibility
