@@ -23,7 +23,7 @@ Currently supported languages:
   * Python 3.6+
   * [NumPy](https://numpy.org) and [SciPy](https://www.scipy.org) 
   * [pytrec_eval](https://github.com/cvangysel/pytrec_eval) to evaluate the runs 
-  * [nltk](https://www.nltk.org/) library to use PorterStemmer and perform stopword removal
+  * [nltk](https://www.nltk.org/) library to perform stemming and stopword removal in several languages
   * [Pandas](https://pandas.pydata.org) library to be able to save the dataset as a dataframe compatible with [MatchZoo](https://github.com/NTMC-Community/MatchZoo) 
   * **Optional**:
     * [Rank-BM25](https://github.com/dorianbrown/rank_bm25) as a first efficient ranking stage if you want to use [MatchZoo](https://github.com/NTMC-Community/MatchZoo)
