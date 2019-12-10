@@ -1,4 +1,6 @@
 import os
+import sys 
+import csv
 import json
 import argparse
 import build_wikIR
@@ -112,93 +114,112 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c','--config', nargs="?", type=str)
     parser.add_argument('-g','--gpu', nargs="?", type=str, default = None)
-    parser.add_argument('-r','--nb_runs', nargs="?", type=int, default = 5)
+    parser.add_argument('-e','--epoch', nargs="?", type=int, default = 50)
+    parser.add_argument('-r','--run_id', nargs="?", type=int, default = 0)
+    
     args = parser.parse_args()
     
     config = json.load(open(args.config,'r'))
+    
+#     print(args,flush=True)
+#     print(config,flush=True)
     
     if args.gpu:
         os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
     
     train_raw,validation_raw,test_raw = load_wikIR(config["collection_path"])
     
-    glove_embedding = mz.datasets.embeddings.load_glove_embedding(dimension=300)
-    task = mz.tasks.Ranking(loss=mz.losses.RankCrossEntropyLoss(num_neg=4))
+    
+    if "embeddings_path" in config:
+        csv.field_size_limit(sys.maxsize)
+        data = pd.read_csv(config["embeddings_path"],
+                    sep=" ",
+                    index_col=0,
+                    header=None,
+                    skiprows=1,
+                    quoting=csv.QUOTE_NONE)
+        embedding = mz.embedding.Embedding(data)
+    
+    
+    else: 
+        embedding = mz.datasets.embeddings.load_glove_embedding(dimension=300)
+    
+    task = mz.tasks.Ranking(loss=mz.losses.RankCrossEntropyLoss(num_neg=5))
     IR_models = [mz.models.list_available()[i] for i in config["index_mz_models"]]
     
-    for run in range(args.nb_runs):    
-        for model_class in IR_models:
-            print(model_class.__name__)
+#     for run in range(args.nb_runs):    
+    for model_class in IR_models:
+        print(model_class.__name__)
 
 
-            validation_path = config["collection_path"] + '/validation/' + model_class.__name__
+        validation_path = config["collection_path"] + '/validation/' + model_class.__name__
 
-            if not os.path.exists(validation_path):
-                os.mkdir(validation_path)
+        if not os.path.exists(validation_path):
+            os.mkdir(validation_path)
 
-            test_path = config["collection_path"] + '/test/' + model_class.__name__
+        test_path = config["collection_path"] + '/test/' + model_class.__name__
 
-            if not os.path.exists(test_path):
-                os.mkdir(test_path)
+        if not os.path.exists(test_path):
+            os.mkdir(test_path)
 
 
-            preprocessor = model_class.get_default_preprocessor(
-                                 fixed_length_left= 10,
-                                 fixed_length_right = 200,
-                                 filter_mode = 'tf',
-                                 filter_low_freq = 5,
-                                 filter_high_freq = float('inf'),
-                                 remove_stop_words = True)
+        preprocessor = model_class.get_default_preprocessor(
+                             fixed_length_left= 10,
+                             fixed_length_right = 200,
+                             filter_mode = 'tf',
+                             filter_low_freq = 5,
+                             filter_high_freq = float('inf'),
+                             remove_stop_words = True)
 
-            model, preprocessor, data_generator_builder, embedding_matrix = mz.auto.prepare(
-                task=task,
-                model_class=model_class,
-                data_pack=train_raw,
-                preprocessor=preprocessor,
-                embedding = glove_embedding)
+        model, preprocessor, data_generator_builder, embedding_matrix = mz.auto.prepare(
+            task=task,
+            model_class=model_class,
+            data_pack=train_raw,
+            preprocessor=preprocessor,
+            embedding = embedding)
 
-            train_processed = preprocessor.transform(train_raw, verbose=0)
-            validation_processed = preprocessor.transform(validation_raw, verbose=0)
-            test_processed = preprocessor.transform(test_raw, verbose=0)
+        train_processed = preprocessor.transform(train_raw, verbose=0)
+        validation_processed = preprocessor.transform(validation_raw, verbose=0)
+        test_processed = preprocessor.transform(test_raw, verbose=0)
 
-            train_gen = data_generator_builder.build(train_processed,batch_size=64,mode='pair')
-            validation_gen = data_generator_builder.build(validation_processed,mode='pair',num_neg=0,num_dup=1)
-            test_gen = data_generator_builder.build(test_processed,mode='pair',num_neg=0,num_dup=1)
+        train_gen = data_generator_builder.build(train_processed,batch_size=64,mode='pair')
+        validation_gen = data_generator_builder.build(validation_processed,mode='pair',num_neg=0,num_dup=1)
+        test_gen = data_generator_builder.build(test_processed,mode='pair',num_neg=0,num_dup=1)
+
+        evaluate_and_save_results(model,
+                                  validation_gen,
+                                  validation_path,
+                                  args.run_id,
+                                  0,
+                                  config["collection_path"],
+                                  config["collection_path"] + '/validation/qrels')
+
+        evaluate_and_save_results(model,
+                                  test_gen,
+                                  test_path,
+                                  args.run_id,
+                                  0,
+                                  config["collection_path"],
+                                  config["collection_path"] + '/test/qrels')
+
+        for _ in range(args.epoch):
+            model.fit_generator(train_gen, epochs=1,verbose=0)
 
             evaluate_and_save_results(model,
                                       validation_gen,
                                       validation_path,
-                                      run,
-                                      0,
+                                      args.run_id,
+                                      (1+_),
                                       config["collection_path"],
                                       config["collection_path"] + '/validation/qrels')
 
             evaluate_and_save_results(model,
                                       test_gen,
                                       test_path,
-                                      run,
-                                      0,
+                                      args.run_id,
+                                      (1+_),
                                       config["collection_path"],
                                       config["collection_path"] + '/test/qrels')
-
-            for _ in range(50):
-                model.fit_generator(train_gen, epochs=2)
-
-                evaluate_and_save_results(model,
-                                          validation_gen,
-                                          validation_path,
-                                          run,
-                                          (1+_)*2,
-                                          config["collection_path"],
-                                          config["collection_path"] + '/validation/qrels')
-
-                evaluate_and_save_results(model,
-                                          test_gen,
-                                          test_path,
-                                          run,
-                                          (1+_)*2,
-                                          config["collection_path"],
-                                          config["collection_path"] + '/test/qrels')
     
 if __name__ == "__main__":
     main()
