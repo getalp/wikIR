@@ -1,5 +1,5 @@
 # WIKIR
-A python toolkit for building a large scale Wikipedia-based Information Retrieval dataset
+A python tool for building large scale Wikipedia-based Information Retrieval datasets
 
 Currently supported languages:  
 **English**  
