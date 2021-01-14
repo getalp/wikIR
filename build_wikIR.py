@@ -6,7 +6,6 @@ import argparse
 import pytrec_eval
 import numpy as np
 import pandas as pd
-from rank_bm25 import BM25Okapi
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.snowball import FrenchStemmer
@@ -558,6 +557,7 @@ def run_BM25_collection(output_dir,documents,queries,qrels,train,validation,test
         doc_indexes.append(key)
         doc = [stemmer.stem(elem) for elem in value.split(" ") if elem not in stop_words]
         corpus.append(value.split(" "))
+    from rank_bm25 import BM25Okapi
     bm25 = BM25Okapi(corpus)
     
     print("Running BM25",flush=True)
