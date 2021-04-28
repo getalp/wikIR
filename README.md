@@ -291,13 +291,21 @@ python display_res.py -c config.json
 If you use wikIR tool or the dataset(s) we provide to produce results for your scientific publication, please refer to our [paper](https://arxiv.org/abs/1912.01901v4):
 
 ```bash
-@misc{frej2019wikir,
-    title={WIKIR: A Python toolkit for building a large-scale Wikipedia-based English Information Retrieval Dataset},
-    author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
-    year={2019},
-    eprint={1912.01901},
-    archivePrefix={arXiv},
-    primaryClass={cs.IR}
+@inproceedings{frej-etal-2020-wikir,
+title = "{WIKIR}: A Python Toolkit for Building a Large-scale {W}ikipedia-based {E}nglish Information Retrieval Dataset",
+author = "Frej, Jibril and
+Schwab, Didier and
+Chevallet, Jean-Pierre",
+booktitle = "Proceedings of the 12th Language Resources and Evaluation Conference",
+month = may,
+year = "2020",
+address = "Marseille, France",
+publisher = "European Language Resources Association",
+url = "https://www.aclweb.org/anthology/2020.lrec-1.237",
+pages = "1926--1933",
+abstract = "Over the past years, deep learning methods allowed for new state-of-the-art results in ad-hoc information retrieval. However such methods usually require large amounts of annotated data to be effective. Since most standard ad-hoc information retrieval datasets publicly available for academic research (e.g. Robust04, ClueWeb09) have at most 250 annotated queries, the recent deep learning models for information retrieval perform poorly on these datasets. These models (e.g. DUET, Conv-KNRM) are trained and evaluated on data collected from commercial search engines not publicly available for academic research which is a problem for reproducibility and the advancement of research. In this paper, we propose WIKIR: an open-source toolkit to automatically build large-scale English information retrieval datasets based on Wikipedia. WIKIR is publicly available on GitHub. We also provide wikIR59k: a large-scale publicly available dataset that contains 59,252 queries and 2,617,003 (query, relevant documents) pairs.",
+language = "English",
+ISBN = "979-10-95546-34-4",
 }
 ```
 
